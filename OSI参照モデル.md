@@ -3,8 +3,8 @@ OSI参照モデルとTCP/IPの対応表（実務でよく使うコマンドの�
 | OSI層 | 層名 | TCP/IP階層 | 主要プロトコル | コンピュータ上の処理 | Linuxコマンド例 |
 | ----- | ----- | ----- | ----- | ----- | ----- |
 | **第7層** | **アプリケーション層** | **アプリケーション層**  | **HTTP, HTTPS, FTP, SMTP, POP3, IMAP, DNS, SSH, Telnet** | **通信アプリケーションプログラム** | **curl, ssh, dig** |
-| **第6層** | **プレゼンテーション層** |  | **SSL/TLS, JPEG, GIF, ASCII** |  | **openssl** |
-| **第5層** | **セッション層** |  | **NetBIOS, RPC, PPTP** |  | **netstat** |
+| **第6層** | **プレゼンテーション層** |  **アプリケーション層**  | **SSL/TLS, JPEG, GIF, ASCII** | **通信アプリケーションプログラム** | **openssl** |
+| **第5層** | **セッション層** |  **アプリケーション層**   | **NetBIOS, RPC, PPTP** | **通信アプリケーションプログラム** | **netstat** |
 | **第4層** | **トランスポート層** | **トランスポート層** | **TCP, UDP** | **OS**  | **netstat, ss nmap (ポートスキャン)** |
 | **第3層** | **ネットワーク層** | **インターネット層** | **IP, ICMP, ARP, OSPF, BGP** |  | **ping, traceroute,  ip addr, ip route** |
 | **第2層** | **データリンク層** | **ネットワークインターフェース層**  | **Ethernet, PPP, Wi-Fi,ARP** | **デバイス・ドライバ・NIC** | **ip link (NIC状態), arp (ARPテーブル), tcpdump (パケットキャプチャ)** |
