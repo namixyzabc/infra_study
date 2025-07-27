@@ -8,6 +8,7 @@
 
 ### DNSがよくわかる教科書
 
-![81OvVxDWFEL _SY385_](https://github.com/user-attachments/assets/5c2a50b3-a9af-420b-b38d-55c9c352c51e)
+![61l1kASDSvL _SY425_](https://github.com/user-attachments/assets/a7a2629d-de76-4c2d-b1e6-0089134844bf)
+
 
 DNSについて、わかりやすく、理解が深まった
