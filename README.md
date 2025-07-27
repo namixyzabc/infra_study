@@ -49,7 +49,7 @@ AWSの基本操作はこれで覚えた
 
 ![833331OeyRmqmjL _SY385_](https://github.com/user-attachments/assets/91b9f932-1e9d-4ee9-ae43-ba2469e6a812)
 
-Terraformの基本
+Terraformの基本が学べる。ざっと読んだ後は実践したほうがいい。
 
 ---
 
@@ -57,7 +57,7 @@ Terraformの基本
 
 ![55581Yr2DW1WRL _SY385_](https://github.com/user-attachments/assets/92f185a5-e23d-4d0a-b612-07ea87b3bfb3)
 
-GitHub Actionsの基本
+GitHub Actionsの基本が学べる。実践後にまた読み返したい
 
 ---
 
