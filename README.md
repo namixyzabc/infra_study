@@ -7,6 +7,7 @@
 
 
 ### DNSがよくわかる教科書
-![Uploading 81OvVxDWFEL._SY385_.jpg…]()
+
+![81OvVxDWFEL _SY385_](https://github.com/user-attachments/assets/5c2a50b3-a9af-420b-b38d-55c9c352c51e)
 
 DNSについて、わかりやすく、理解が深まった
