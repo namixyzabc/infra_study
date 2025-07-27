@@ -75,4 +75,13 @@ GitHub Actionsの基本が学べる。実践後にまた読み返したい
 
 Pythonの基礎。次はFastAPIやDjangoなどのframeworkを学びたい
 
+---
+
+### Ansible実践ガイド 第4版［基礎編］
+
+![999991m1cOOLuCL _SY385_](https://github.com/user-attachments/assets/2bb3e801-9e4f-4d4a-be65-c5d2caf6c552)
+
+1周して、基礎をなんとなく理解。また読んで深く理解が必要
+
+
 
