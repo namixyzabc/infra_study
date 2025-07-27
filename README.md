@@ -44,3 +44,17 @@ AWSの基本操作はこれで覚えた
 
 ---
 
+### 詳解 Terraform 第3版 ―Infrastructure as Codeを実現する
+
+
+![833331OeyRmqmjL _SY385_](https://github.com/user-attachments/assets/91b9f932-1e9d-4ee9-ae43-ba2469e6a812)
+
+Terraformの基本
+
+---
+
+### GitHub CI/CD実践ガイド――持続可能なソフトウェア開発を支えるGitHub Actionsの設計と運用 エンジニア選書
+
+![55581Yr2DW1WRL _SY385_](https://github.com/user-attachments/assets/92f185a5-e23d-4d0a-b612-07ea87b3bfb3)
+
+GitHub Actionsの基本
