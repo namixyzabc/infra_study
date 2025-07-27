@@ -23,3 +23,14 @@ LPICの本だと、いまいち理解しずらかったが、この本で理解�
 ![11181toNwsR5nL _SY385_](https://github.com/user-attachments/assets/c448b5e1-4249-483c-8a51-8ef4b6541d5e)
 
 URLをクリックしてからサーバーがレスポンスを返す一連の処理について、理解が深まった
+
+---
+
+### Amazon Web Services基礎からのネットワーク＆サーバー構築改訂４版
+
+![22281vRa3y5jXL _SY385_](https://github.com/user-attachments/assets/6a82547f-8d41-4778-98ac-675944ae4efb)
+
+AWSの基本操作はこれで覚えた
+
+---
+
