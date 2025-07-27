@@ -67,3 +67,11 @@ GitHub Actionsの基本が学べる。実践後にまた読み返したい
 
 内容が難しい個所があるため、初心者向けの本を読んだ後であればおすすめ。また読み返したい。
 
+
+### 1週間でPythonの基礎が学べる本
+
+![877771yc6oTpiWL _SY425_](https://github.com/user-attachments/assets/f10fec25-bb68-4d25-b9d6-75e600f18f3b)
+
+Pythonの基礎。次はFastAPIやDjangoなどのframeworkを学びたい
+
+
