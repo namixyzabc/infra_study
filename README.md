@@ -58,3 +58,12 @@ Terraformの基本
 ![55581Yr2DW1WRL _SY385_](https://github.com/user-attachments/assets/92f185a5-e23d-4d0a-b612-07ea87b3bfb3)
 
 GitHub Actionsの基本
+
+---
+
+### Docker/Kubernetes実践コンテナ開発入門
+
+![66681yw8uw1giL _SY385_](https://github.com/user-attachments/assets/3d941fdd-a251-48e8-87d4-3298c3fafc4e)
+
+内容が難しい個所があるため、初心者向けの本を読んだ後であればおすすめ。
+
