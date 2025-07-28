@@ -1,179 +1,137 @@
-# digコマンド完全ガイド
-
-## 基本概要
-`dig`（Domain Information Groper）は、DNSの情報を調査するためのコマンドラインツールです。nslookupよりも詳細で柔軟な情報取得が可能です。
+# digコマンドの実務的な使い方
 
 ## 基本構文
 ```bash
-dig [@DNSサーバー] ドメイン名 [レコードタイプ] [オプション]
+dig [@サーバー] [ドメイン] [レコード種類] [オプション]
 ```
 
-## 基本的な使い方
+## 1. 基本的な使い方
 
-### 1. 最もシンプルな使用法
+### 最もシンプルな使用
 ```bash
 dig google.com
 ```
-→ AレコードとDNSサーバーの情報を表示
 
-### 2. 特定のレコードタイプを指定
-```bash
-dig google.com MX      # メールサーバー情報
-dig google.com NS      # ネームサーバー情報
-dig google.com AAAA    # IPv6アドレス
-dig google.com TXT     # テキストレコード
-dig google.com CNAME   # エイリアス情報
+**出力結果の見方:**
+```
+; <<>> DiG 9.18.12 <<>> google.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 12345
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; QUESTION SECTION:
+;google.com.			IN	A
+
+;; ANSWER SECTION:
+google.com.		300	IN	A	142.250.196.142
+
+;; Query time: 15 msec
+;; SERVER: 192.168.1.1#53(192.168.1.1)
+;; WHEN: Wed Jan 10 10:30:45 JST 2024
+;; MSG SIZE  rcvd: 55
 ```
 
-### 3. 特定のDNSサーバーに問い合わせ
+**重要な部分:**
+- `ANSWER SECTION`: 実際の回答（IPアドレス）
+- `300`: TTL（秒）
+- `Query time`: 応答時間
+
+## 2. 実務でよく使うパターン
+
+### A) シンプルな結果のみ表示（+short）
 ```bash
-dig @8.8.8.8 google.com        # GoogleのDNS
-dig @1.1.1.1 google.com        # CloudflareのDNS
-dig @208.67.222.222 google.com # OpenDNS
+dig google.com +short
+142.250.196.142
+```
+→ **一番よく使う！** 余計な情報なしでIPアドレスだけ
+
+### B) 特定のレコード種類を調べる
+```bash
+# MXレコード（メールサーバー）
+dig google.com MX +short
+10 smtp.google.com.
+
+# CNAMEレコード
+dig www.github.com CNAME +short
+github.com.
+
+# NSレコード（ネームサーバー）
+dig google.com NS +short
 ```
 
-## 実務でよく使うコマンド集
-
-### DNS設定の確認・トラブルシューティング
-
+### C) 特定のDNSサーバーに問い合わせ
 ```bash
-# ドメインのすべてのレコードタイプを確認
-dig google.com ANY
+# Googleの公開DNSに問い合わせ
+dig @8.8.8.8 google.com +short
 
-# 権威DNSサーバーから直接問い合わせ
-dig @ns1.google.com google.com
-
-# 逆引き（IPアドレスからドメイン名）
-dig -x 8.8.8.8
-
-# DNSの伝播確認（複数のDNSサーバーで確認）
-dig @8.8.8.8 example.com
-dig @1.1.1.1 example.com
-dig @208.67.222.222 example.com
+# Cloudflareの公開DNSに問い合わせ
+dig @1.1.1.1 google.com +short
 ```
 
-### 詳細情報の取得
+## 3. トラブルシューティングでよく使う
 
+### 逆引き（IPからドメイン名を調べる）
 ```bash
-# 簡潔な出力（IPアドレスのみ）
-dig +short google.com
-
-# トレース機能（ルートから順番に辿る）
-dig +trace google.com
-
-# キャッシュを使わず権威サーバーから取得
-dig +norecurse google.com
-
-# 詳細なデバッグ情報付き
-dig +debug google.com
+dig -x 8.8.8.8 +short
+dns.google.
 ```
 
-## 実務レベルの活用例
-
-### 1. Webサイト移行時のDNS確認
+### TTL値を確認（キャッシュ問題の調査）
 ```bash
-#!/bin/bash
-# 複数のDNSサーバーでレコードをチェック
-DOMAIN="example.com"
-DNS_SERVERS=("8.8.8.8" "1.1.1.1" "208.67.222.222")
+dig google.com | grep "IN A"
+google.com.		300	IN	A	142.250.196.142
+```
+→ 300秒でキャッシュが更新される
 
-for dns in "${DNS_SERVERS[@]}"; do
-    echo "=== DNS Server: $dns ==="
-    dig @$dns +short $DOMAIN
-    echo
-done
+### トレース（DNS解決の経路を確認）
+```bash
+dig google.com +trace
+```
+→ ルートサーバーから順番に解決過程を表示
+
+## 4. 実務的な活用例
+
+### サーバー移行時の確認
+```bash
+# 移行前後でIPが変わったか確認
+dig example.com +short
 ```
 
-### 2. メール設定の確認
+### ロードバランサーの確認
 ```bash
-# MXレコードの確認
-dig example.com MX
-
-# SPFレコードの確認
-dig example.com TXT | grep -i spf
-
-# DKIMレコードの確認
-dig selector1._domainkey.example.com TXT
+# 複数のIPが返ってくるか確認
+dig cdn.example.com +short
+203.0.113.1
+203.0.113.2
+203.0.113.3
 ```
 
-### 3. CDN・ロードバランサーの設定確認
+### メールサーバーの設定確認
 ```bash
-# 地域別DNSの確認
-dig +short example.com
-dig +short @8.8.8.8 example.com
-dig +short @208.67.220.220 example.com
-
-# TTL値の確認
-dig example.com | grep "IN.*A"
+dig example.com MX +short
+10 mail1.example.com.
+20 mail2.example.com.
 ```
 
-### 4. セキュリティ関連の確認
+## 5. 便利なエイリアス設定
+
+`.bashrc`に追加すると便利：
 ```bash
-# DNSSEC確認
-dig +dnssec example.com
-
-# CAA（証明書発行許可）レコード確認
-dig example.com CAA
-
-# DMARCポリシー確認
-dig _dmarc.example.com TXT
+alias digs='dig +short'
+alias digmx='dig MX +short'
+alias digns='dig NS +short'
 ```
 
-## 便利なオプション一覧
-
-| オプション | 説明 |
-|------------|------|
-| `+short` | 簡潔な出力（結果のみ） |
-| `+trace` | クエリの経路を表示 |
-| `+norecurse` | 再帰問い合わせなし |
-| `+tcp` | TCPで問い合わせ |
-| `+time=5` | タイムアウト時間設定 |
-| `+retry=3` | リトライ回数設定 |
-| `+noall +answer` | 回答部分のみ表示 |
-
-## よくあるトラブルシューティング
-
-### 1. DNS伝播の確認
+使用例：
 ```bash
-# 世界各地のDNSサーバーで確認
-dig @8.8.8.8 +short example.com          # Google（米国）
-dig @208.67.222.222 +short example.com   # OpenDNS（米国）
-dig @1.1.1.1 +short example.com          # Cloudflare（グローバル）
+digs google.com          # dig google.com +short と同じ
+digmx google.com         # dig google.com MX +short と同じ
 ```
 
-### 2. 権威サーバーの確認
-```bash
-# ドメインの権威サーバーを確認してから直接問い合わせ
-NS_SERVER=$(dig +short example.com NS | head -1)
-dig @$NS_SERVER example.com
-```
+## まとめ：最低限覚えるべき3つ
 
-### 3. パフォーマンス測定
-```bash
-# 応答時間の測定
-dig example.com | grep "Query time"
+1. `dig ドメイン名 +short` - IPアドレスを素早く確認
+2. `dig @8.8.8.8 ドメイン名 +short` - 特定DNSサーバーで確認  
+3. `dig ドメイン名 MX +short` - メールサーバー確認
 
-# 複数回実行して平均を取る
-for i in {1..5}; do
-    dig example.com | grep "Query time"
-done
-```
-
-## 実際の運用シーン
-
-### ドメイン移行チェックリスト
-```bash
-# 1. 現在の設定確認
-dig old-domain.com ANY
-
-# 2. 新しいDNS設定の確認
-dig @new-dns-server.com new-domain.com
-
-# 3. TTL確認（低い値に設定されているか）
-dig old-domain.com | grep -E "^old-domain.com.*IN.*A"
-
-# 4. 移行後の確認
-dig +trace new-domain.com
-```
-
-これらのコマンドを使い分けることで、DNS関連の問題を効率的に診断・解決できます。特に`+short`と`+trace`は日常的によく使うオプションなので覚えておくと便利です。
