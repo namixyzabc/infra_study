@@ -1,0 +1,1 @@
+ajsprint -F AJSROOT -a "*" > フォルダパス
