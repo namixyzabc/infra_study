@@ -1,4 +1,4 @@
-# 学習法＆おすすめ本
+# 学習法＆専門AIの作り方＆おすすめ本
 
 ### 学習法
 <img width="1182" height="372" alt="image" src="https://github.com/user-attachments/assets/aac38963-f16a-4d2c-b0b6-c3d8b890101a" />
