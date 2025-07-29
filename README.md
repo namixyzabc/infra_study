@@ -10,7 +10,8 @@
 
 ### AIに資料を読み込ませて、専門のAIを作る
 
-<img width="526" height="302" alt="jp1" src="https://github.com/user-attachments/assets/51b7efcd-9aca-4541-b09e-c22eca7e2188" />
+<img width="939" height="618" alt="1111" src="https://github.com/user-attachments/assets/0ab2ddc0-5ef1-41f8-88ad-4fcf9dfd9ce5" />
+
 
 
 ---
