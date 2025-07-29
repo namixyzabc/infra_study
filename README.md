@@ -7,6 +7,12 @@
 - 1日１章読み、3章進んだら、2週目に移る（短期間で見返し、記憶を定着化させる）
 - 3週目は期間を開けて、Googleドキュメントに保存したメモを見る
 
+
+### AIに資料を読み込ませて、専門のAIを作る
+
+<img width="526" height="302" alt="jp1" src="https://github.com/user-attachments/assets/51b7efcd-9aca-4541-b09e-c22eca7e2188" />
+
+
 ---
 
 ### 図解入門TCP/IP 仕組み・動作が見てわかる
