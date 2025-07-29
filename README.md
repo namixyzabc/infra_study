@@ -88,29 +88,17 @@ Pythonの基礎。次はFastAPIやDjangoなどのframeworkを学びたい
 
 ### その他、これまでに読んだ本
 
-・Linux教科書 LPICレベル1 Version5.0対応
-
-・LPICレベル2: Version4.5対応
-
-・徹底攻略LPIC Level3 303
-
-・基礎からわかる！CCNA最短合格講義
-
-・AWS実務入門 インフラ基本編
-
-・AWS認定資格 ソリューションアーキテクトアソシエイトの教科書
-
-・1週間でPythonの基礎が学べる本
-
-・1週間でMySQLの基礎が学べる本
-
-・いちばんやさしいGit&GitHubの教本
-
-・さわって学ぶクラウドインフラ docker基礎からのコンテナ構築
-
-・Docker&仮想サーバー完全入門 Webクリエイター＆エンジニアの作業がはかどる開発環境構築ガイド
-
-・15Stepで習得 Dockerから入るKubernetes コンテナ開発からK8s本番運用まで
-
+・Linux教科書 LPICレベル1 Version5.0対応 \
+・LPICレベル2: Version4.5対応 \
+・徹底攻略LPIC Level3 303 \
+・基礎からわかる！CCNA最短合格講義 \
+・AWS実務入門 インフラ基本編 \
+・AWS認定資格 ソリューションアーキテクトアソシエイトの教科書 \
+・1週間でPythonの基礎が学べる本 \
+・1週間でMySQLの基礎が学べる本 \
+・いちばんやさしいGit&GitHubの教本 \
+・さわって学ぶクラウドインフラ docker基礎からのコンテナ構築 \
+・Docker&仮想サーバー完全入門 Webクリエイター＆エンジニアの作業がはかどる開発環境構築ガイド \
+・15Stepで習得 Dockerから入るKubernetes コンテナ開発からK8s本番運用まで \
 ・つくって、壊して、直して学ぶ Kubernetes入門 \
-・Kubernetesの知識地図
+・Kubernetesの知識地図 \
