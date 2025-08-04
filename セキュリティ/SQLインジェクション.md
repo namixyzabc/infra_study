@@ -51,7 +51,7 @@ if ($result->num_rows > 0) {
 この入力により、アプリケーション内部で組み立てられるSQL文は次のようになります。
 
 ```sql
-SELECT * FROM users WHERE user_id = 'admin' --' AND password = ''```
+SELECT * FROM users WHERE user_id = 'admin' --' AND password = ''
 
 SQLでは「`--`」以降はコメントとして扱われ、実行時に無視されます。 そのため、実際にデータベースで実行されるSQL文は以下の部分だけになります。
 
