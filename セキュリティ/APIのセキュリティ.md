@@ -198,7 +198,7 @@ app.get('/api/v1/admin/users', requireAdmin, (req, res) => {
 });
 ```
 
----
+```
 
 #### **API6:2023 - Unrestricted Access to Sensitive Business Flows / 機微なビジネスフローへの無制限なアクセス**
 
