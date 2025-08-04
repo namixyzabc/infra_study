@@ -65,7 +65,7 @@ app.get('/api/v1/users/:userId/profile', (req, res) => {
 
 また、推測されにくいランダムなID（UUID/GUIDなど）を使用することも、攻撃を困難にする上で有効です。
 
-```
+---
 
 #### **API2:2023 - Broken Authentication / 認証の不備**
 
