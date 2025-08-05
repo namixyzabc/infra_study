@@ -266,7 +266,7 @@
             <mxPoint x="77.5" y="1255" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="flow-amplify-cf" value="Build & Deploy" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="aws-cloud" source="amplify" target="cloudfront">
+        <mxCell id="flow-amplify-cf" value="Build &amp; Deploy" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="aws-cloud" source="amplify" target="cloudfront">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="87.5" y="1170" as="sourcePoint" />
             <mxPoint x="297.5" y="477.5" as="targetPoint" />
