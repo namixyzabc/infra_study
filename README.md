@@ -116,4 +116,5 @@ Pythonの基礎。次はFastAPIやDjangoなどのframeworkを学びたい
 ・Kubernetesの知識地図 \
 ・徹底攻略 情報処理安全確保支援士教科書 \
 ・ひと目でわかるActive Directory Windows Server 2022版 \
-・ひと目でわかるWindows Server 2022
+・ひと目でわかるWindows Server 2022 \
+・Microsoft認定資格試験テキスト　AZ-104：Microsoft Azure Administrator
