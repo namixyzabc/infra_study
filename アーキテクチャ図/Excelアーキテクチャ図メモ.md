@@ -1,5 +1,5 @@
 
-<img width="1586" height="639" alt="12345" src="https://github.com/user-attachments/assets/8d1c529b-2b7a-42b6-8219-50954f5856d8" />
+<img width="1592" height="653" alt="000999" src="https://github.com/user-attachments/assets/f9ecbe35-6b41-4edc-bc89-ddba8602f3c3" />
 
 - 線図を直線にしたい場合　⇒　Alt
 - 図形のグループ化は便利
