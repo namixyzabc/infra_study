@@ -102,6 +102,9 @@ Pythonの基礎。次はFastAPIやDjangoなどのframeworkを学びたい
 
 ・Linux教科書 LPICレベル1 Version5.0対応 \
 ・LPICレベル2: Version4.5対応 \
+・本気で学ぶ Linux実践入門　サーバ運用のための業務レベル管理術 \
+・ゼロからわかるLinuxサーバー超入門　Ubuntu対応版 かんたんIT基礎講座 \
+・新しいLinuxの教科書 \
 ・徹底攻略LPIC Level3 303 \
 ・基礎からわかる！CCNA最短合格講義 \
 ・AWS実務入門 インフラ基本編 \
