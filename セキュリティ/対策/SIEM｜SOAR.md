@@ -1,5 +1,3 @@
----
-
 ## 第1部: SIEM (Security Information and Event Management) の解説
 
 ### 1-1. SIEMとは何か？
