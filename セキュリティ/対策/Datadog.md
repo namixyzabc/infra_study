@@ -60,8 +60,7 @@ Datadogは、これら三本柱を一つの画面でシームレスに切り替�
     3.  Datadogの `Infrastructure > Host Map` を見ると、EC2インスタンスがCPU使用率やメモリ使用率に応じて色分けされたマップで可視化されます。
     4.  特定のホストをクリックすると、そのホストに関する詳細なメトリクス（CPU、メモリ、ディスク、ネットワーク）のダッシュボードが表示されます。
 
-![Infrastructure Host Mapのイメージ](https://docs.datadoghq.com/assets/images/dashboards/widgets/hostmap/host_map.png)
-*(出典: Datadog Docs)*
+
 
 #### 2.2. APM (Application Performance Monitoring)
 
@@ -73,8 +72,7 @@ Datadogは、これら三本柱を一つの画面でシームレスに切り替�
     *   各スパンには、処理名、開始時刻、処理時間、関連するサービス、タグなどの情報が含まれます。
     *   これらのスパンが親子関係を持つツリー構造を形成し、リクエスト全体の処理の流れ（＝トレース）を可視化します。これを**フレームグラフ (Flame Graph)**と呼びます。
 
-![トレースのフレームグラフのイメージ](https://docs.datadoghq.com/assets/images/apm/trace_view_flame_graph.png)
-*(出典: Datadog Docs)*
+
 
 *   **導入方法:**
     *   APMを利用するには、アプリケーションのコードにDatadogのトレーシングライブラリを組み込みます。多くの言語（Java, Python, Ruby, Go, Node.js, .NET, PHPなど）に対応したライブラリが提供されています。
