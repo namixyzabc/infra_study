@@ -1,8 +1,3 @@
-## Gitコミットメッセージのベストプラクティス / Git Commit Message Best Practices
-
-Gitのコミットメッセージを分かりやすく規律あるものにすることは、プロジェクトのメンテナンス性やチームでの共同作業の効率を大きく向上させます。ここでは、世界的に広く採用されている「Conventional Commits」という規約に基づいたベストプラクティスを、よく使われるものから順にご紹介します。
-
-A clear and disciplined Git commit message style significantly improves project maintainability and team collaboration efficiency. Here, we introduce best practices based on the widely adopted "Conventional Commits" specification, ordered by frequency of use.
 
 ### コミットメッセージ一覧表 / Commit Message Cheat Sheet
 
