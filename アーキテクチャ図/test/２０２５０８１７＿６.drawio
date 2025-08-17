@@ -1,160 +1,216 @@
-<mxfile host="app.diagrams.net" modified="2025-08-17T06:35:00.000Z" agent="Mozilla/5.0" version="24.7.10" editor="www.diagrams.net">
-  <diagram id="aws-arch-ecs" name="AWS Architecture">
-    <mxGraphModel dx="1280" dy="920" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1280" pageHeight="920">
+<mxfile host="app.diagrams.net" modified="2025-08-17T06:51:00.000Z" agent="Mozilla/5.0" version="24.7.1" libraries="aws4">
+  <diagram id="aws-ecs-arch" name="Page-1">
+    <mxGraphModel dx="1280" dy="920" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1280" pageHeight="920" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <!-- AWS Cloud container -->
-        <mxCell id="aws_cloud" value="AWS Cloud" style="rounded=1;whiteSpace=wrap;html=1;container=1;dropTarget=1;strokeColor=#BDBDBD;fillColor=#FAFAFA;" vertex="1" parent="1">
-          <mxGeometry x="20" y="80" width="1240" height="820" as="geometry" />
+
+        <!-- LAYERS -->
+        <mxCell id="layer_bg" value="bg" style="layer" parent="1" />
+        <mxCell id="layer_vpc" value="vpc" style="layer" parent="1" />
+        <mxCell id="layer_infra" value="infra" style="layer" parent="1" />
+        <mxCell id="layer_ecs" value="ecs" style="layer" parent="1" />
+        <mxCell id="layer_side" value="sidepanels" style="layer" parent="1" />
+        <mxCell id="layer_flows" value="flows" style="layer" parent="1" />
+        <mxCell id="layer_labels" value="labels" style="layer" parent="1" />
+
+        <!-- ===== bg ===== -->
+        <mxCell id="bg_aws_cloud" value="AWS Cloud" parent="layer_bg" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#D1D5DB;fillColor=#FFFFFF;align=left;verticalAlign=top;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="20" y="120" width="1240" height="780" as="geometry" />
         </mxCell>
-        <!-- VPC (adjusted height to fit RDS) -->
-        <mxCell id="vpc" value="VPC" style="shape=mxgraph.aws4.vpc;whiteSpace=wrap;html=1;container=1;dropTarget=1;strokeColor=#7E57C2;fillColor=#FFFFFF;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="80" y="160" width="1020" height="710" as="geometry" />
+        <mxCell id="bg_user" parent="layer_bg" vertex="1" style="shape=mxgraph.aws4.users;verticalLabelPosition=bottom;verticalAlign=top;">
+          <mxGeometry x="616" y="20" width="48" height="48" as="geometry" />
         </mxCell>
-        <!-- Public/Private Subnets -->
-        <mxCell id="public_left" value="Public subnet" style="shape=mxgraph.aws4.public_subnet;html=1;container=1;dropTarget=1;whiteSpace=wrap;strokeColor=#BDBDBD;fillColor=#FFFFFF;headerColor=#A5D6A7;" vertex="1" parent="vpc">
-          <mxGeometry x="30" y="60" width="480" height="200" as="geometry" />
+        <mxCell id="bg_internet" parent="layer_bg" vertex="1" style="shape=mxgraph.aws4.internet_alt;verticalLabelPosition=bottom;verticalAlign=top;">
+          <mxGeometry x="614" y="84" width="52" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="public_right" value="Public subnet" style="shape=mxgraph.aws4.public_subnet;html=1;container=1;dropTarget=1;whiteSpace=wrap;strokeColor=#BDBDBD;fillColor=#FFFFFF;headerColor=#A5D6A7;" vertex="1" parent="vpc">
-          <mxGeometry x="540" y="60" width="450" height="200" as="geometry" />
+
+        <!-- ===== sidepanels (top: org/DNS) ===== -->
+        <mxCell id="side_multi_outer" value="マルチアカウント" parent="layer_side" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#E5C07B;fillColor=#FDF3D7;align=left;verticalAlign=top;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="60" y="160" width="270" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="private_left" value="Private subnet" style="shape=mxgraph.aws4.private_subnet;html=1;container=1;dropTarget=1;whiteSpace=wrap;strokeColor=#BDBDBD;fillColor=#FFFFFF;headerColor=#80DEEA;" vertex="1" parent="vpc">
-          <mxGeometry x="30" y="300" width="480" height="320" as="geometry" />
+        <mxCell id="side_sso_label" value="SSO" parent="layer_side" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#E5C07B;fillColor=#FDF3D7;align=center;verticalAlign=middle;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="200" y="170" width="60" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="private_right" value="Private subnet" style="shape=mxgraph.aws4.private_subnet;html=1;container=1;dropTarget=1;whiteSpace=wrap;strokeColor=#BDBDBD;fillColor=#FFFFFF;headerColor=#80DEEA;" vertex="1" parent="vpc">
-          <mxGeometry x="540" y="300" width="450" height="320" as="geometry" />
+        <mxCell id="icon_org" parent="layer_side" vertex="1" style="shape=mxgraph.aws4.organizations;">
+          <mxGeometry x="90" y="210" width="90" height="90" as="geometry" />
         </mxCell>
-        <!-- Top users and Internet -->
-        <mxCell id="top_users" value="" style="shape=mxgraph.aws4.users;html=1;whiteSpace=wrap;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="600" y="-60" width="48" height="48" as="geometry" />
+        <mxCell id="icon_identity" parent="layer_side" vertex="1" style="shape=mxgraph.aws4.identity_center;">
+          <mxGeometry x="200" y="210" width="90" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="internet" value="Internet" style="shape=mxgraph.aws4.internet_alt;html=1;whiteSpace=wrap;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="600" y="10" width="56" height="44" as="geometry" />
+        <mxCell id="side_dns_label" value="DNS" parent="layer_side" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#E5C07B;fillColor=#FDF3D7;align=center;verticalAlign=middle;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="520" y="160" width="70" height="26" as="geometry" />
         </mxCell>
-        <!-- Route53 + DNS badge -->
-        <mxCell id="r53" value="Route53&#xa;DNS" style="shape=mxgraph.aws4.route_53;html=1;whiteSpace=wrap;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="680" y="90" width="100" height="80" as="geometry" />
+
+        <!-- ===== infra (Route53 top icon) ===== -->
+        <mxCell id="infra_route53" parent="layer_infra" vertex="1" style="shape=mxgraph.aws4.route_53;">
+          <mxGeometry x="520" y="196" width="100" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="dns_badge" value="DNS" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FFCC80;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="640" y="75" width="60" height="24" as="geometry" />
+
+        <!-- ===== vpc & subnets ===== -->
+        <mxCell id="vpc_frame" value="VPC" parent="layer_vpc" vertex="1" style="shape=mxgraph.aws4.vpc;align=left;verticalAlign=top;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="200" y="260" width="860" height="560" as="geometry" />
         </mxCell>
-        <!-- Org/SSO group -->
-        <mxCell id="org_sso_group" value="" style="rounded=1;whiteSpace=wrap;html=1;container=1;dropTarget=1;fillColor=#FFF3E0;strokeColor=#FFE0B2;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="40" y="70" width="280" height="170" as="geometry" />
+        <mxCell id="subnet_pub_l" value="Public subnet" parent="layer_vpc" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#34A853;fillColor=#E8F5E9;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="220" y="280" width="400" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="orgs" value="Organizations" style="shape=mxgraph.aws4.organizations;html=1;whiteSpace=wrap;" vertex="1" parent="org_sso_group">
-          <mxGeometry x="20" y="40" width="100" height="80" as="geometry" />
+        <mxCell id="subnet_pub_r" value="Public subnet" parent="layer_vpc" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#34A853;fillColor=#E8F5E9;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="660" y="280" width="380" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="sso" value="Identity Center" style="shape=mxgraph.aws4.single_sign_on;html=1;whiteSpace=wrap;" vertex="1" parent="org_sso_group">
-          <mxGeometry x="140" y="40" width="100" height="80" as="geometry" />
+        <mxCell id="subnet_pri_l" value="Private subnet" parent="layer_vpc" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#3B82F6;fillColor=#E6F0FA;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="220" y="500" width="400" height="180" as="geometry" />
         </mxCell>
-        <!-- Env group (left) -->
-        <mxCell id="env_group" value="環境変数" style="rounded=1;whiteSpace=wrap;html=1;container=1;dropTarget=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="40" y="460" width="180" height="250" as="geometry" />
+        <mxCell id="subnet_pri_r" value="Private subnet" parent="layer_vpc" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#3B82F6;fillColor=#E6F0FA;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="660" y="500" width="380" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="secrets" value="Secrets Manager" style="shape=mxgraph.aws4.secrets_manager;html=1;whiteSpace=wrap;" vertex="1" parent="env_group">
-          <mxGeometry x="30" y="40" width="120" height="80" as="geometry" />
+
+        <!-- ===== infra (IGW / NAT / ALB / ACM) ===== -->
+        <mxCell id="infra_igw" parent="layer_infra" vertex="1" style="shape=mxgraph.aws4.internet_gateway;">
+          <mxGeometry x="600" y="260" width="46" height="46" as="geometry" />
         </mxCell>
-        <mxCell id="s3" value="S3" style="shape=mxgraph.aws4.s3;html=1;whiteSpace=wrap;" vertex="1" parent="env_group">
-          <mxGeometry x="30" y="130" width="120" height="80" as="geometry" />
+        <mxCell id="infra_natgw" parent="layer_infra" vertex="1" style="shape=mxgraph.aws4.nat_gateway;">
+          <mxGeometry x="884" y="460" width="86" height="86" as="geometry" />
         </mxCell>
-        <!-- Docker images group (right) -->
-        <mxCell id="docker_group" value="Dockerイメージ" style="rounded=1;whiteSpace=wrap;html=1;container=1;dropTarget=1;fillColor=#FFF3E0;strokeColor=#FFE0B2;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="1100" y="460" width="160" height="230" as="geometry" />
+        <mxCell id="infra_alb" parent="layer_infra" vertex="1" style="shape=mxgraph.aws4.alb;">
+          <mxGeometry x="570" y="440" width="100" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="ecr" value="ECR" style="shape=mxgraph.aws4.ecr;html=1;whiteSpace=wrap;" vertex="1" parent="docker_group">
-          <mxGeometry x="20" y="20" width="120" height="80" as="geometry" />
+        <mxCell id="infra_acm" parent="layer_infra" vertex="1" style="shape=mxgraph.aws4.certificate_manager;">
+          <mxGeometry x="380" y="420" width="110" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="cwl" value="CloudWatch Logs" style="shape=mxgraph.aws4.cloudwatch_logs;html=1;whiteSpace=wrap;" vertex="1" parent="docker_group">
-          <mxGeometry x="20" y="110" width="120" height="80" as="geometry" />
+
+        <!-- ===== ecs block & db ===== -->
+        <mxCell id="ecs_app_area" value="アプリ領域" parent="layer_ecs" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#60A5FA;fillColor=#E7F8FF;fontFamily=Noto Sans;fontSize=12;align=left;verticalAlign=top;">
+          <mxGeometry x="220" y="540" width="820" height="260" as="geometry" />
         </mxCell>
-        <!-- IGW and NAT -->
-        <mxCell id="igw" value="" style="shape=mxgraph.aws4.internet_gateway;html=1;whiteSpace=wrap;strokeColor=#7E57C2;fillColor=#EDE7F6;" vertex="1" parent="vpc">
-          <mxGeometry x="522" y="30" width="44" height="44" as="geometry" />
+        <mxCell id="ecs_cluster" value="ECSクラスター" parent="layer_ecs" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;dashed=1;dashPattern=6 6;strokeColor=#F59E0B;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="280" y="580" width="700" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="nat" value="NAT Gateway" style="shape=mxgraph.aws4.nat_gateway;html=1;whiteSpace=wrap;" vertex="1" parent="public_right">
-          <mxGeometry x="220" y="130" width="110" height="80" as="geometry" />
+        <mxCell id="ecs_service" value="ECSサービス" parent="layer_ecs" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;dashed=1;dashPattern=6 6;strokeColor=#F59E0B;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="420" y="600" width="420" height="140" as="geometry" />
         </mxCell>
-        <!-- ACM note + ACM -->
-        <mxCell id="acm_note" value="https 証明書" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;" vertex="1" parent="public_left">
-          <mxGeometry x="130" y="30" width="120" height="36" as="geometry" />
+        <mxCell id="ecs_task" parent="layer_ecs" vertex="1" style="shape=mxgraph.aws4.ecs_task;">
+          <mxGeometry x="590" y="620" width="100" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="acm" value="Certificate Manager" style="shape=mxgraph.aws4.certificate_manager;html=1;whiteSpace=wrap;" vertex="1" parent="public_left">
-          <mxGeometry x="130" y="70" width="110" height="80" as="geometry" />
+        <mxCell id="db_rds" parent="layer_ecs" vertex="1" style="shape=mxgraph.aws4.rds;">
+          <mxGeometry x="600" y="820" width="80" height="80" as="geometry" />
         </mxCell>
-        <!-- ALB -->
-        <mxCell id="alb" value="ALB" style="shape=mxgraph.aws4.alb;html=1;whiteSpace=wrap;" vertex="1" parent="public_left">
-          <mxGeometry x="370" y="120" width="110" height="90" as="geometry" />
+
+        <!-- ===== sidepanels (left env) ===== -->
+        <mxCell id="side_env_outer" value="環境変数" parent="layer_side" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#A3E635;fillColor=#F2FCE3;align=left;verticalAlign=top;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="60" y="520" width="140" height="260" as="geometry" />
         </mxCell>
-        <!-- ECS Cluster / Service (dashed orange) -->
-        <mxCell id="ecs_cluster" value="ECSクラスター" style="dashed=1;strokeColor=#F57C00;rounded=1;fillColor=none;whiteSpace=wrap;html=1;container=1;dropTarget=1;" vertex="1" parent="vpc">
-          <mxGeometry x="160" y="370" width="780" height="260" as="geometry" />
+        <mxCell id="icon_secrets" parent="layer_side" vertex="1" style="shape=mxgraph.aws4.secrets_manager;">
+          <mxGeometry x="80" y="540" width="100" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="ecs_service" value="ECSサービス" style="dashed=1;strokeColor=#F57C00;rounded=1;fillColor=none;whiteSpace=wrap;html=1;container=1;dropTarget=1;" vertex="1" parent="ecs_cluster">
-          <mxGeometry x="120" y="40" width="540" height="170" as="geometry" />
+        <mxCell id="icon_s3" parent="layer_side" vertex="1" style="shape=mxgraph.aws4.s3;">
+          <mxGeometry x="80" y="660" width="100" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="ecs_task" value="ECSタスク" style="shape=mxgraph.aws4.ecs_task;html=1;whiteSpace=wrap;" vertex="1" parent="ecs_service">
-          <mxGeometry x="250" y="50" width="110" height="90" as="geometry" />
+
+        <!-- ===== sidepanels (right docker/ecr/logs) ===== -->
+        <mxCell id="side_docker_outer" value="Dockerイメージ" parent="layer_side" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#FDBA74;fillColor=#FFF1E6;align=left;verticalAlign=top;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="1080" y="520" width="140" height="260" as="geometry" />
         </mxCell>
-        <mxCell id="go_text" value="GO" style="text;html=1;whiteSpace=wrap;fontStyle=1;fontSize=20;" vertex="1" parent="ecs_service">
-          <mxGeometry x="370" y="90" width="40" height="24" as="geometry" />
+        <mxCell id="icon_ecr" parent="layer_side" vertex="1" style="shape=mxgraph.aws4.ecr;">
+          <mxGeometry x="1100" y="540" width="100" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="api_label" value="API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#D7CCC8;" vertex="1" parent="ecs_service">
-          <mxGeometry x="120" y="130" width="60" height="28" as="geometry" />
+        <mxCell id="icon_cwlogs" parent="layer_side" vertex="1" style="shape=mxgraph.aws4.cloudwatch_logs;">
+          <mxGeometry x="1100" y="680" width="100" height="100" as="geometry" />
         </mxCell>
-        <!-- RDS -->
-        <mxCell id="rds" value="RDS" style="shape=mxgraph.aws4.rds;html=1;whiteSpace=wrap;" vertex="1" parent="vpc">
-          <mxGeometry x="530" y="620" width="110" height="90" as="geometry" />
+
+        <!-- ===== labels ===== -->
+        <mxCell id="label_internet" value="Internet" parent="layer_labels" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="614" y="130" width="52" height="20" as="geometry" />
         </mxCell>
-        <!-- Connectors (only specified ones) -->
-        <!-- E1: top_users -> internet -->
-        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;" edge="1" parent="aws_cloud" source="top_users" target="internet">
+        <mxCell id="label_acm_note" value="https 証明書" parent="layer_labels" vertex="1" style="shape=note;rounded=1;absoluteArcSize=1;arcSize=8;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="350" y="380" width="140" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="label_api" value="API" parent="layer_labels" vertex="1" style="rounded=1;absoluteArcSize=1;arcSize=8;shadow=0;strokeColor=#D1D5DB;fillColor=#FFFFFF;align=center;verticalAlign=middle;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="520" y="700" width="60" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="label_go" value="GO" parent="layer_labels" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="645" y="705" width="60" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="label_logs_note" value="ログ出力" parent="layer_labels" vertex="1" style="shape=note;rounded=1;absoluteArcSize=1;arcSize=8;fontFamily=Noto Sans;fontSize=12;">
+          <mxGeometry x="980" y="710" width="80" height="28" as="geometry" />
+        </mxCell>
+
+        <!-- ===== flows (connectors) ===== -->
+        <!-- 1. Users → Internet -->
+        <mxCell id="flow1" parent="layer_flows" edge="1" source="bg_user" target="bg_internet" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;endFill=1;strokeColor=#5B21B6;strokeWidth=2;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <!-- E2: internet -> igw -->
-        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;" edge="1" parent="aws_cloud" source="internet" target="igw">
+        <!-- 2. Internet → IGW -->
+        <mxCell id="flow2" parent="layer_flows" edge="1" source="bg_internet" target="infra_igw" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;endFill=1;strokeColor=#5B21B6;strokeWidth=2;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <!-- E3: r53 -> alb -->
-        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;" edge="1" parent="aws_cloud" source="r53" target="alb">
+        <!-- 3. IGW → ALB -->
+        <mxCell id="flow3" parent="layer_flows" edge="1" source="infra_igw" target="infra_alb" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;endFill=1;strokeColor=#5B21B6;strokeWidth=2;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <!-- E4: acm -> alb -->
-        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;" edge="1" parent="public_left" source="acm" target="alb">
+        <!-- 4. ACM → ALB (dashed) -->
+        <mxCell id="flow4" parent="layer_flows" edge="1" source="infra_acm" target="infra_alb" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;dashPattern=6 6;endArrow=block;endFill=1;strokeColor=#A3A3A3;strokeWidth=1.5;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <!-- E5: igw -> alb -->
-        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;" edge="1" parent="vpc" source="igw" target="alb">
+        <!-- 5. ALB → ECSタスク -->
+        <mxCell id="flow5" parent="layer_flows" edge="1" source="infra_alb" target="ecs_task" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;endFill=1;strokeColor=#5B21B6;strokeWidth=2;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <!-- E6: alb -> ecs_task -->
-        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;" edge="1" parent="vpc" source="alb" target="ecs_task">
+        <!-- 6. NAT GW → ECSタスク (right→down→left) -->
+        <mxCell id="flow6" parent="layer_flows" edge="1" source="infra_natgw" target="ecs_task" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;endFill=1;strokeColor=#5B21B6;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1010" y="620" />
+              <mxPoint x="720" y="620" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- 7. ECSタスク → RDS -->
+        <mxCell id="flow7" parent="layer_flows" edge="1" source="ecs_task" target="db_rds" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;endFill=1;strokeColor=#5B21B6;strokeWidth=2;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <!-- E7: ecs_task -> rds -->
-        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;" edge="1" parent="vpc" source="ecs_task" target="rds">
-          <mxGeometry relative="1" as="geometry" />
+        <!-- 8. Secrets Manager → ECSタスク (dashed) -->
+        <mxCell id="flow8" parent="layer_flows" edge="1" source="icon_secrets" target="ecs_task" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;dashPattern=6 6;endArrow=block;endFill=1;strokeColor=#A3A3A3;strokeWidth=1.5;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="600" />
+              <mxPoint x="540" y="600" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <!-- E8: private_right area -> nat -->
-        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;" edge="1" parent="vpc" source="private_right" target="nat">
-          <mxGeometry relative="1" as="geometry" />
+        <!-- 9. S3 → ECSタスク (dashed) -->
+        <mxCell id="flow9" parent="layer_flows" edge="1" source="icon_s3" target="ecs_task" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;dashPattern=6 6;endArrow=block;endFill=1;strokeColor=#A3A3A3;strokeWidth=1.5;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="700" />
+              <mxPoint x="540" y="700" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <!-- E9: ecs_task -> secrets (dashed) -->
-        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;dashed=1;" edge="1" parent="aws_cloud" source="ecs_task" target="secrets">
-          <mxGeometry relative="1" as="geometry" />
+        <!-- 10. ECR → ECSクラスタ枠（右辺中央） (dashed short horizontal) -->
+        <mxCell id="flow10" parent="layer_flows" edge="1" source="icon_ecr" target="ecs_cluster" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;dashPattern=6 6;endArrow=block;endFill=1;strokeColor=#A3A3A3;strokeWidth=1.5;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1000" y="590" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <!-- E10: ecs_task -> s3 (dashed) -->
-        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;dashed=1;" edge="1" parent="aws_cloud" source="ecs_task" target="s3">
-          <mxGeometry relative="1" as="geometry" />
+        <!-- 11. ECSタスク → CloudWatch Logs (rightward polyline) -->
+        <mxCell id="flow11" parent="layer_flows" edge="1" source="ecs_task" target="icon_cwlogs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;endFill=1;strokeColor=#5B21B6;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="680" />
+              <mxPoint x="1100" y="730" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <!-- E11: ecs_task -> ecr (dashed) -->
-        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;dashed=1;" edge="1" parent="aws_cloud" source="ecs_task" target="ecr">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <!-- E12: ecs_task -> cwl (dashed) -->
-        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=1;dashed=1;" edge="1" parent="aws_cloud" source="ecs_task" target="cwl">
-          <mxGeometry relative="1" as="geometry" />
+        <!-- 12. Route53 → ALB (diagonal-ish orth) -->
+        <mxCell id="flow12" parent="layer_flows" edge="1" source="infra_route53" target="infra_alb" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;endFill=1;strokeColor=#5B21B6;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="300" />
+              <mxPoint x="570" y="440" />
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
