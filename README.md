@@ -47,6 +47,13 @@ LPICの本だと、いまいち理解しずらかったが、この本で理解�
 URLをクリックしてからサーバーがレスポンスを返す一連の処理について、理解が深まった
 
 ---
+### システム設計の面接試験
+
+![81Zc3ttiVjL _SY425_](https://github.com/user-attachments/assets/55ddc432-5726-4ab9-b5ba-d3dbf9ef908a)
+
+システム設計および選定の理解が深まった
+
+---
 
 ### Amazon Web Services基礎からのネットワーク＆サーバー構築改訂４版
 
