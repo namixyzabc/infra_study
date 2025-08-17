@@ -1,10 +1,96 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" version="28.1.0">
-  <diagram name="ページ1" id="N_cyHgWnoF37DtFHKKj2">
-    <mxGraphModel>
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-      </root>
-    </mxGraphModel>
-  </diagram>
+<mxfile host="app.diagrams.net" modified="2025-08-17T00:00:00.000Z" agent="Mozilla/5.0" version="22.0.8" editor="diagrams.net"> 
+　<diagram id="aws-ecs-arch" name="AWS"> 
+　　<mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="0" connect="0" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0"> 
+　　　<root> <mxCell id="0"/> 
+　　　　<mxCell id="1" parent="0"/>
+    <!-- VPC group (no label) -->
+    <mxCell id="vpc" value="" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.vpc;rounded=1;absoluteArcSize=1;arcSize=6;fillColor=none;strokeColor=#8A63D2;strokeWidth=2;dashed=0;labelPosition=left;verticalLabelPosition=top;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;header=0;" vertex="1" parent="1">
+      <mxGeometry x="150" y="220" width="1200" height="820" as="geometry"/>
+    </mxCell>
+
+    <!-- Public subnets (left/right) -->
+    <mxCell id="pub-left" value="" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.public_subnet;rounded=0;fillColor=#E7F4E4;strokeColor=#2E7D32;strokeWidth=1;header=0;dashed=0;" vertex="1" parent="vpc">
+      <mxGeometry x="20" y="20" width="560" height="220" as="geometry"/>
+    </mxCell>
+    <mxCell id="pub-right" value="" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.public_subnet;rounded=0;fillColor=#E7F4E4;strokeColor=#2E7D32;strokeWidth=1;header=0;dashed=0;" vertex="1" parent="vpc">
+      <mxGeometry x="620" y="20" width="560" height="220" as="geometry"/>
+    </mxCell>
+
+    <!-- Private subnets (left/right) -->
+    <mxCell id="pri-left" value="" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;rounded=0;fillColor=#E8F1FB;strokeColor=#1E88E5;strokeWidth=1;header=0;dashed=0;" vertex="1" parent="vpc">
+      <mxGeometry x="20" y="260" width="560" height="520" as="geometry"/>
+    </mxCell>
+    <mxCell id="pri-right" value="" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;rounded=0;fillColor=#E8F1FB;strokeColor=#1E88E5;strokeWidth=1;header=0;dashed=0;" vertex="1" parent="vpc">
+      <mxGeometry x="620" y="260" width="560" height="520" as="geometry"/>
+    </mxCell>
+
+    <!-- Icons in / near VPC (no labels) -->
+    <!-- Internet Gateway (top-center inside VPC) -->
+    <mxCell id="igw" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#7AA116;shape=mxgraph.aws4.internet_gateway;" vertex="1" parent="vpc">
+      <mxGeometry x="560" y="10" width="64" height="64" as="geometry"/>
+    </mxCell>
+
+    <!-- ALB (center-top) -->
+    <mxCell id="alb" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#B0084D;shape=mxgraph.aws4.application_load_balancer;" vertex="1" parent="vpc">
+      <mxGeometry x="540" y="110" width="80" height="80" as="geometry"/>
+    </mxCell>
+
+    <!-- Certificate Manager (left of ALB) -->
+    <mxCell id="acm" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#8C4FFF;shape=mxgraph.aws4.certificate_manager;" vertex="1" parent="vpc">
+      <mxGeometry x="430" y="110" width="80" height="80" as="geometry"/>
+    </mxCell>
+
+    <!-- NAT Gateway (right public subnet) -->
+    <mxCell id="nat" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#4D27AA;shape=mxgraph.aws4.nat_gateway;" vertex="1" parent="vpc">
+      <mxGeometry x="1020" y="120" width="72" height="72" as="geometry"/>
+    </mxCell>
+
+    <!-- ECS cluster / service / task (center of private) -->
+    <mxCell id="ecs-cluster" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#FF9900;shape=mxgraph.aws4.ecs;" vertex="1" parent="vpc">
+      <mxGeometry x="520" y="380" width="86" height="86" as="geometry"/>
+    </mxCell>
+    <mxCell id="ecs-service" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#FF9900;shape=mxgraph.aws4.ecs_service;" vertex="1" parent="vpc">
+      <mxGeometry x="610" y="420" width="72" height="72" as="geometry"/>
+    </mxCell>
+    <mxCell id="ecs-task" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#FF9900;shape=mxgraph.aws4.ecs_container;" vertex="1" parent="vpc">
+      <mxGeometry x="700" y="460" width="68" height="68" as="geometry"/>
+    </mxCell>
+
+    <!-- RDS (bottom-center) -->
+    <mxCell id="rds" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#527FFF;shape=mxgraph.aws4.rds;" vertex="1" parent="vpc">
+      <mxGeometry x="560" y="690" width="84" height="84" as="geometry"/>
+    </mxCell>
+
+    <!-- Outside-VPC icons (left: Secrets Manager, S3) -->
+    <mxCell id="secrets" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#D6242F;shape=mxgraph.aws4.secrets_manager;" vertex="1" parent="1">
+      <mxGeometry x="70" y="520" width="80" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="s3" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#569A31;shape=mxgraph.aws4.s3;" vertex="1" parent="1">
+      <mxGeometry x="70" y="620" width="80" height="80" as="geometry"/>
+    </mxCell>
+
+    <!-- Outside-VPC icons (right: ECR, CloudWatch Logs) -->
+    <mxCell id="ecr" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#FF9900;shape=mxgraph.aws4.elastic_container_registry;" vertex="1" parent="1">
+      <mxGeometry x="1370" y="520" width="84" height="84" as="geometry"/>
+    </mxCell>
+    <mxCell id="cw-logs" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#FF4F8B;shape=mxgraph.aws4.cloudwatch_logs;" vertex="1" parent="1">
+      <mxGeometry x="1370" y="630" width="84" height="84" as="geometry"/>
+    </mxCell>
+
+    <!-- Top-left governance icons -->
+    <mxCell id="orgs" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#D6242F;shape=mxgraph.aws4.organizations;" vertex="1" parent="1">
+      <mxGeometry x="190" y="300" width="84" height="84" as="geometry"/>
+    </mxCell>
+    <mxCell id="sso" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#FF4F8B;shape=mxgraph.aws4.single_sign_on;" vertex="1" parent="1">
+      <mxGeometry x="290" y="300" width="84" height="84" as="geometry"/>
+    </mxCell>
+
+    <!-- Route 53 (DNS) -->
+    <mxCell id="route53" value="" style="verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;strokeColor=none;fillColor=#8A2BE2;shape=mxgraph.aws4.route_53;" vertex="1" parent="1">
+      <mxGeometry x="1100" y="260" width="84" height="84" as="geometry"/>
+    </mxCell>
+
+　　  </root>
+　　</mxGraphModel>
+　</diagram> 
 </mxfile>
