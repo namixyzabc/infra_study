@@ -76,7 +76,7 @@
         <mxCell id="api_label" value="API" style="text;align=center;verticalAlign=middle;spacing=6;fontSize=12;strokeColor=none;fillColor=#fff9e6;" parent="ecs_cluster" vertex="1">
           <mxGeometry x="20" y="180" width="60" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="rds" value="RDS" style="shape=mxgraph.aws4.rds_instance;verticalLabelPosition=bottom;verticalAlign=top;" parent="vpc" vertex="1">
+        <mxCell id="rds" value="RDS" style="shape=mxgraph.aws4.rds_instance;verticalLabelPosition=bottom;verticalAlign=top;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="vpc" vertex="1">
           <mxGeometry x="380" y="540" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="e_igw_alb" style="endArrow=block;dashed=0;strokeWidth=2;" parent="vpc" source="igw" target="alb" edge="1">
