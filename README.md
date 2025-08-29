@@ -55,6 +55,15 @@ URLをクリックしてからサーバーがレスポンスを返す一連の�
 
 ---
 
+### ランサムウエアに負けない、ゼロトラスト大全
+
+![81p4EICNKfL _SY425_](https://github.com/user-attachments/assets/eaea6bdd-5dd3-4915-a912-3cde48e8196d)
+
+業務で、Prisma AccessやZscaler Private Accessをなんとなく理解していたが、この本で、実際のセキュリティインシデントの例を見て、なぜ必要なのかを深く理解することができた。
+
+
+---
+
 ### Amazon Web Services基礎からのネットワーク＆サーバー構築改訂４版
 
 ![22281vRa3y5jXL _SY385_](https://github.com/user-attachments/assets/6a82547f-8d41-4778-98ac-675944ae4efb)
