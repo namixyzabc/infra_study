@@ -114,6 +114,16 @@ Pythonの基礎。次はFastAPIやDjangoなどのframeworkを学びたい
 
 ---
 
+### システム設計のセオリーと実践⽅法がこれ1冊でしっかりわかる教科書
+
+![81mSiGUiRbL _SY425_](https://github.com/user-attachments/assets/b887dd24-0b80-43d3-b5a7-3a1d3a963fec)
+
+
+インフラの案件で、なぜその資料が必要なのか＆ひな形の内容を、案件で作成したものと照らし合わせて見ることができた
+
+
+---
+
 ### その他、これまでに読んだ本
 
 ・Linux教科書 LPICレベル1 Version5.0対応 \
