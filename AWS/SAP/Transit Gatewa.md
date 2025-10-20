@@ -1,133 +1,106 @@
-# Transit Gateway 概要
+# AWS Transit Gateway（TGW）概要
 
-`AWS Transit Gateway` は、複数の `VPC`、オンプレミス（`Site-to-Site VPN`、`Direct Connect`）や他リージョンの `Transit Gateway` を「ハブ＆スポーク」型で集約・中継するマネージドなルーティングハブです。個々の `VPC Peering` では実現しづらい大規模・多拠点のトランジティブ（中継）接続を、シンプルな運用とスケーラビリティで提供します。リージョン単位の冗長性を持ち、アタッチメント（接続）とルートテーブル（経路制御）で柔軟にネットワーク分割・集約が可能です。
+`Transit Gateway` は、複数の `VPC` やオンプレミス（`VPN`/`Direct Connect`）をリージョン内で集約・相互接続するマネージドなハブサービスです。ハブ＆スポーク型のトポロジで、非推移（トランジティブでない）な `VPC Peering` の複雑さを解消し、大規模ネットワークを一元管理できます。`Transit Gateway Route Table` により、環境別（例：Prod/Dev）などのセグメント分離や、経路制御（どこに行けるか／行けないか）を細かく設計できます。
 
-用語補足:
-- ハブ＆スポーク: 中央の「ハブ」に全ての拠点（スポーク）を接続し、拠点間通信をハブで中継する設計。
-- トランジティブ: A—ハブ—B のように、中継点を通じて第三者同士の通信を成立させること（VPC Peering は基本非トランジティブ）。
+---
 
+## 覚えるべき要点（用語補足つき）
 
-# 覚えるべき要点
+### 基本コンセプト
+- `Transit Gateway (TGW)` はリージョン単位のハブで、複数の接続元（`attachment`）を束ねるルータの役割を果たします（L3ルーティングのみ、NATはしない）。
+- `attachment`（アタッチメント）とは、`VPC`、`Site-to-Site VPN`、`Direct Connect Gateway`、`TGW Peering` など TGW への接続単位のこと。
+- 変換（NAT）なしのIPルーティングのため、基本は重複しないアドレス設計（非重複CIDR）が必要（オーバーラップは不可。必要ならNAT/ファイアウォール等で解決）。
+- マルチアカウント環境では `AWS Resource Access Manager (RAM)` を使って TGW を共有可能。
 
-## 1) サービスの位置づけと特性
-- リージョン単位のハブ: `Transit Gateway` は1リージョン内の中心ハブ。複数作成も可能。
-- フルマネージド・高可用: 障害時の冗長化はAWS側で提供。ユーザーが台数やクラスタを管理する必要はない。
-- トランジティブ接続: 同一 `Transit Gateway` 配下のスポーク（`VPC`/オンプレ）が相互通信可能（ルート許可前提）。
+### 主なアタッチメント種別
+- `VPC attachment`
+  - TGW が各 `AZ` のサブネットに `ENI` を配置して接続（AZ単位で冗長化するにはAZごとにサブネットを指定）。
+  - `appliance mode` を有効化すると、ステートフルな中間装置（例：FW）を通す際の経路対称性（往復が同じ経路）を担保できる。
+- `Site-to-Site VPN attachment`
+  - IPsecトンネル。`BGP` による動的ルーティングに対応。複数トンネルでの `ECMP`（等コスト経路分散）により冗長化・スループット向上が可能。
+- `Direct Connect Gateway (DXGW) attachment`
+  - `Transit VIF` 経由で TGW に接続。`BGP` による動的ルーティング。オンプレから複数VPCへのハブ接続に適する。
+- `Transit Gateway Peering attachment`
+  - TGW 間のリージョンを跨いだ接続。AWSバックボーン上で暗号化される。非推移（中継不可）に注意。
+  - 制限：`VPN`/`DX` 由来の経路はピアリング越しに伝播しない（オンプレ経路を他リージョンTGWへ“中継”できない）。
+- `Transit Gateway Connect`
+  - GRE+BGP による SD-WAN 統合向け機能（仮想/物理アプライアンスと連携しやすい）。
+- `Multicast`
+  - TGWマルチキャスト（`IGMP` ベース）。特定ユースケース向けで試験では優先度低め。
 
-## 2) 基本コンポーネント
-- アタッチメント（Attachment）
-  - 種類: `VPC`、`Site-to-Site VPN`、`Direct Connect Gateway`、`Transit Gateway Peering`、`Connect`（SD-WAN/GRE+BGP）、`Multicast`
-  - 役割: `Transit Gateway` に接続するための「ポート」のようなもの
-- `Transit Gateway` ルートテーブル
-  - 経路の集約点。複数作成可
-  - 各アタッチメントは「関連付け（Association）」でき、また経路を「伝播（Propagation）」できる
-  - スタティックルート（手動）と動的ルート（BGPなどの伝播）を保持。静的が同一プレフィクスなら優先
-- 用語補足
-  - 関連付け: そのアタッチメント発のトラフィックが参照するTGWルートテーブルを決める
-  - 伝播: アタッチメントから学習した経路をTGWルートテーブルへ自動登録（VPCは基本伝播しない）
+### Transit Gateway Route Table（経路制御の要）
+- TGW は複数の `Transit Gateway Route Table` を持てる。VPCごとや環境ごとに分離可能（例：`prod-rt`、`dev-rt`）。
+- `association（関連付け）` と `propagation（伝播）` の違いが最重要。
+  - `association`：ある `attachment` から出るトラフィックが「どのルートテーブルを参照するか」を決める。
+  - `propagation`：ある `attachment` のプレフィックス（CIDR）を「どのルートテーブルへ学習させるか」を決める。
+- `default route table` の挙動
+  - 既定で新規 `attachment` はデフォルトRTに関連付け/伝播される設定になりがち。意図しない横断通信が起きるため、明示的に無効化/分離するのがベストプラクティス。
+- ルートは静的追加も可能。`VPN`/`DX` は `BGP` により動的に経路伝播できる。
+- `Prefix List` を参照したルーティング指定に対応し、運用性を向上できる。
 
-## 3) VPCアタッチメントの要点
-- AZごとにサブネットを選択: 選んだ各AZに `TGW` の `ENI` が作られる
-- イン-AZ最適化: 送受信は可能な限り同一AZのアタッチメントを使い、クロスAZデータ処理コストを低減
-- `VPC` 側ルートテーブル設定が必須: 送信先プレフィクスを `Transit Gateway` ターゲットへ向ける
-- 帰り道も要確認: 対向側（他VPC/オンプレ）→`TGW`→該当VPC へ戻る経路が `TGW` ルートテーブルにあること
+### 代表的な設計パターン
+- 共有サービスVPC（Shared Services）
+  - AD、DNS、監視、CI/CDなど共通基盤を1つのVPCに集約し、他VPCからTGW経由で到達。
+  - ルートテーブルを分けることで不要な横断通信を遮断。
+- 集中Egress/NAT（Centralized Egress）
+  - 各スポークVPCのデフォルトルート（`0.0.0.0/0`）をTGWへ向け、中央のEgress VPCで `NAT Gateway` や `Internet Gateway` から外部通信。
+  - ステートフル検査（FW）を挟むなら `appliance mode`＋対称ルーティング設計が必須。
+- 中央インスペクション（Firewall/GWLB統合）
+  - サービス間通信・外向き通信を中央のセキュリティVPC経由で検査。`Gateway Load Balancer (GWLB)` 連携でスケール。
+- ハイブリッド接続の集約
+  - `DXGW`/`VPN` を TGW に集約し、複数VPCへ配布。バックアップとして `VPN` を併設（DX障害時にフェイルオーバー）。
 
-## 4) ルーティング制御（設計のキモ）
-- 最長一致ルックアップ: より具体的なプレフィクスが選ばれる（例: /24 は /16 に優先）
-- 複数ルートテーブルでセグメント化: 開発/本番、共有サービス、検査用など、用途ごとに分離
-- ブラックホールルート: マッチしたトラフィックを明示的に破棄し、リークやループを防ぐ
-- 伝播の使い分け
-  - `VPN`/`DX Gateway`: BGPで経路伝播可能
-  - `VPC`: 伝播しないため、TGWルートは静的に定義（または他の動的経路と組み合わせ）
-- 静的ルート優先: 同一プレフィクスでは静的が動的より優先される
+### 注意点・制限（試験で問われやすい）
+- アドレス重複
+  - TGW単体では重複CIDRは扱えない。NAT/ファイアウォールで変換・分離するか、設計で回避。
+- 非推移の原則
+  - `TGW Peering` は中継不可（他TGWを経由した三角接続はできない）。`VPN`/`DX` の経路はピア越しに広まらない。
+- セキュリティグループ参照
+  - `VPC Peering` のような他VPCセキュリティグループID参照は `TGW` 経由では不可。到達制御はルーティングとFWで行う。
+- DNS
+  - TGWはDNSを転送しない。クロスVPC解決は `Route 53 Resolver` の `Inbound/Outbound Endpoint` と `Resolver ルール共有（RAM）` を使う。
+- VPCエンドポイントの特性
+  - `Gateway Endpoint`（S3/DynamoDB）は“非トランジティブ”。中央化しても他VPCからTGW経由では使えない。必要VPCごとに配置するか、`Interface Endpoint`/`PrivateLink` を検討。
+- アプライアンス経由の非対称問題
+  - ステートフルFWは送受信が同経路でないとセッション破棄の原因。`appliance mode` とRT設計で対称性を担保。
 
-## 5) インスペクション（セキュリティ）設計
-- 集中型検査VPC（Inspection VPC）パターン
-  - 全トラフィックをファイアウォールVPC経由にするため、`TGW` の複数ルートテーブルで経路を誘導
-  - `AWS Network Firewall`、`Gateway Load Balancer` 組み合わせが定番
-- `Appliance mode`（アプライアンスモード）
-  - ステートフル装置の左右対称ルーティングを実現（往路と復路が同じAZ/装置を通る）
-  - AZを跨いだ非対称経路によるセッション破棄を防ぐ
+### 可用性・性能
+- AZ冗長
+  - `VPC attachment` はアタッチ時に各AZのサブネットを指定。複数AZで冗長化。
+- スループットとECMP
+  - `VPN` は複数トンネルで `ECMP` を使いスループット/可用性を向上。DXは回線側冗長設計が基本。
+- MTU
+  - VPC間は大きめMTUが使えるが、`VPN`（IPsec）はMTUが小さくなる。アプリ要件に注意。
+- クォータ
+  - アタッチメント数、ルート数、ルートテーブル数に上限あり（リージョン/アカウントの最新クォータを確認）。必要に応じて引き上げ申請。
 
-## 6) リージョン間接続（TGW Peering）
-- `Transit Gateway Peering` アタッチメントでリージョン間を接続
-- 非トランジティブ: TGW-A—TGW-B—TGW-C の直列で A→C はデフォルト不可（Bを中継にできない）
-- 暗号化済みでAWSバックボーンを使用。マルチキャストはピアリング非対応
+### コストの考え方
+- 課金は主に以下：
+  - `attachment` の時間課金（接続数に比例）。
+  - `data processing` の転送量課金（TGWを経由するトラフィック量に比例）。
+  - リージョン間は `TGW peering` のデータ処理＋リージョン間データ転送料金。
+  - クロスAZ通信は追加コストがかかり得るため、AZローカル最適化を検討。
+- `VPC Peering` より運用は楽だが、データ処理課金が発生。トラフィックパターンを踏まえ費用対効果を評価。
 
-## 7) オンプレ接続
-- `Site-to-Site VPN`（IPsec）
-  - BGPにより経路学習・フェイルオーバー
-  - `ECMP`（Equal-Cost Multi-Path）で複数トンネルの帯域を並列活用
-- `Direct Connect` 経由
-  - `Direct Connect Gateway` と接続し、プライベートVIFで `TGW` 到達
-  - 大規模ハイブリッドでも中核に据えやすい
-- `Connect` アタッチメント
-  - GREトンネル＋BGPでSD-WANアプライアンスと連携（クラウド内で動的ルーティング）
+### 運用・監視
+- 可視化・運用
+  - `Transit Gateway Flow Logs` でフローを `CloudWatch Logs`/`S3` に出力し、到達性やトラブルシュートに活用。
+  - `CloudWatch` メトリクスでアタッチメント別の統計を監視。
+  - `Transit Gateway Network Manager` でSD-WAN連携、トポロジ/経路可視化、イベント管理。
+- IaC
+  - `CloudFormation`/`Terraform` で `attachment`、`route table`、`association`/`propagation` をコード化しドリフトを防止。
 
-用語補足:
-- BGP: ルータ同士が経路を動的に交換するプロトコル
-- ECMP: 同じコストの複数経路へ負荷分散
+### 試験対策の着眼点（シナリオで狙われやすいところ）
+- 「多VPC・多アカウント・オンプレ統合を簡素化したい」→ `Transit Gateway`。`VPC Peering` は非推移でスケールしない。
+- 「環境分離（Prod/Dev）＋共有サービスにだけ到達」→ 複数 `Transit Gateway Route Table` と `association/propagation` 制御。
+- 「DX本番＋VPNバックアップ」→ `BGP` とルート優先度（AS-Path/メトリクス）でフェイルオーバー設計。
+- 「中央FWで検査」→ セキュリティVPC＋`appliance mode`＋対称ルーティング。`GWLB` 連携でスケールアウト。
+- 「リージョン間VPC接続」→ `TGW Peering`（ただしオンプレ経路は広がらない点に注意）。
+- 「DNSが通らない」→ TGWはDNS中継しない。`Route 53 Resolver` のエンドポイントとルール共有が必要。
+- 「S3/DynamoDBを中央VPC経由で使いたい」→ `Gateway Endpoint` は非トランジティブ。各VPCに配置するか、別方式を検討。
+- 「CIDR重複」→ TGWでは解決不可。NAT/ファイアウォール（SNAT/DNAT）で回避、またはアドレス再設計。
+- 「意図せぬ横断通信が発生」→ デフォルトの `association/propagation` を無効化し、RTを明示的に分離。
 
-## 8) マルチキャスト
-- `Transit Gateway` マルチキャストドメインで1対多配信をサポート
-- `IGMP` によるメンバー管理（主にVPC内の受信ホスト）。ピアリング越えは不可
+---
 
-## 9) 共有と組織連携
-- `AWS RAM`（Resource Access Manager）で他アカウントの `VPC` を同一 `Transit Gateway` に参加可能
-- 複数アカウント・複数VPCを中央集権的に接続・分離できる
-
-## 10) DNS連携の考え方
-- `Transit Gateway` はDNSを転送しない
-- 中央DNSを使いたい場合は、`Route 53 Resolver` のインバウンド/アウトバウンドエンドポイントやルール共有で設計
-- 検査VPC経由にする場合はDNSトラフィックの経路も要計画
-
-## 11) 可用性・スケーリングと制限
-- 自動スケール・冗長化はマネージド。設計者はAZごとのアタッチメント配置を意識
-- 帯域目安（代表例）
-  - `VPC` アタッチメント: 最大およそ数十Gbps級（例: 50 Gbps）
-  - `TGW Peering`: 最大およそ数十Gbps級（例: 50 Gbps）
-  - `Site-to-Site VPN`: 1トンネルあたりの上限あり。ECMPでスケール
-  - `Connect` GREピア単位で上限あり
-- クォータ例（試験向けに意識）
-  - ルート数、アタッチメント数、伝播数に上限あり（最新値はドキュメントで要確認）
-
-## 12) 監視・運用
-- `Transit Gateway Flow Logs`: トラフィック情報を `CloudWatch Logs`／`S3` へ
-- `CloudWatch` メトリクス/アラーム、`EventBridge` でイベント連携
-- トラブル時は
-  - VPCルート → TGWルートテーブルの関連付け/伝播 → 対向側の戻り経路 → セキュリティグループ/NACL
-  - `Reachability Analyzer` も有用（経路探索）
-
-## 13) 料金モデル（設計に効く）
-- 課金は主に以下
-  - アタッチメント時間課金（接続単位）
-  - データ処理料（通過トラフィックのGB課金）
-  - リージョン間ピアリングの転送料（別料金）
-- 料金最適化の定石
-  - 不要なクロスAZを避ける（イン-AZ最適化）
-  - 経路設計で無駄な経由を減らす
-  - 共有ハブを集約しすぎてボトルネック/高額化しないよう分割
-
-## 14) よくある比較・選定ポイント（試験対策）
-- `VPC Peering` vs `Transit Gateway`
-  - Peering: シンプル・安価、非トランジティブ、小規模メッシュ向け
-  - TGW: トランジティブ、大規模・多アカウント・オンプレ連携向け、中心集約で運用容易
-- `PrivateLink`（`NLB` 経由のサービス公開）
-  - L4サービス公開に最適。汎用的な双方向ルーティングには不向き
-- `Cloud WAN` vs `Transit Gateway`
-  - Cloud WAN: グローバル一元化（ポリシーベース、セグメント、マルチリージョンを抽象化）
-  - TGW: リージョン単位のハブ。Cloud WAN配下で各リージョンのハブとして併用する構成もあり
-- NAT/インターネットアクセス
-  - TGW自体はNATしない。出口制御は `NAT Gateway`、ファイアウォール、`Gateway Load Balancer` で設計
-
-## 15) 試験でのひっかけ／設計Tips
-- 同一TGW内はトランジティブだが、`TGW Peering` は非トランジティブ
-- `VPC` からの経路はTGWに自動伝播しない（静的にTGWルートへ登録）
-- 中央検査の左右対称性は `Appliance mode` とAZ設計が鍵
-- マルチアカウントは `AWS RAM` でTGW共有
-- 静的ルートは動的ルートより優先
-- DNSは別設計（`Route 53 Resolver`）
-- ECMPでVPNスループットを水平スケール
-- 料金は「アタッチメント時間＋データ処理＋ピアリング転送」を意識
-
-このセットを押さえておくと、設計問題での判断（どの接続方式・どのルートテーブルに何を関連付け/伝播するか、検査VPCをどう経由させるか、リージョン間をどう張るか）が安定します。
+必要なキーワードと因果（なぜそう設計するか）をセットで覚え、`association（出るとき参照）` と `propagation（経路を載せる）` を即答できるようにしておくと、試験問題の大半は見切れます。
