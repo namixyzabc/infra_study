@@ -71,3 +71,46 @@
 **関連付けサブネット**:
 - subnet-public-1a (10.0.1.0/24)
 - subnet-public-1c (10.0.2.0/24)
+
+
+
+
+
+
+---
+# AWSコンソール風 セキュリティグループ設定例（Webサーバ）
+
+以下は、AWSマネジメントコンソールの「セキュリティグループ」画面に近い見え方でまとめた実務例です。
+
+## セキュリティグループの詳細
+| 項目 | 値 |
+|---|---|
+| セキュリティグループ名 | sg-web-public-ec2 |
+| セキュリティグループID | sg-0abc123def4567890 |
+| 説明 | Public web EC2: allow 80/443 from Internet, SSH from office only |
+| VPC | vpc-0a1b2c3d4e5f67890（prod-vpc） |
+| 所有者 | 123456789012 |
+| インバウンドルール | 5 |
+| アウトバウンドルール | 2 |
+
+## インバウンドルール
+| タイプ | プロトコル | ポート範囲 | ソース | 説明 |
+|---|---|---:|---|---|
+| HTTP | TCP | 80 | 0.0.0.0/0（Anywhere-IPv4） | Allow HTTP from anywhere (IPv4) |
+| HTTP | TCP | 80 | ::/0（Anywhere-IPv6） | Allow HTTP from anywhere (IPv6) |
+| HTTPS | TCP | 443 | 0.0.0.0/0（Anywhere-IPv4） | Allow HTTPS from anywhere (IPv4) |
+| HTTPS | TCP | 443 | ::/0（Anywhere-IPv6） | Allow HTTPS from anywhere (IPv6) |
+| SSH | TCP | 22 | 203.0.113.10/32（Custom） | Allow SSH from office IP only |
+
+## アウトバウンドルール
+| タイプ | プロトコル | ポート範囲 | 送信先 | 説明 |
+|---|---|---:|---|---|
+| すべてのトラフィック | すべて | すべて | 0.0.0.0/0（Anywhere-IPv4） | Allow all outbound (IPv4) |
+| すべてのトラフィック | すべて | すべて | ::/0（Anywhere-IPv6） | Allow all outbound (IPv6) |
+
+## タグ
+| キー | 値 |
+|---|---|
+| Name | sg-web-public-ec2 |
+| Environment | prod |
+| Owner | platform-team |
