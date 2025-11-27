@@ -1,12 +1,4 @@
-# 学習法＆専門AIの作り方＆おすすめ本
-
-### 学習法
-<img width="1182" height="372" alt="image" src="https://github.com/user-attachments/assets/aac38963-f16a-4d2c-b0b6-c3d8b890101a" />
-
-- 目次をWBSにして、３週見返す。
-- 1日１章読み、3章進んだら、2週目に移る（短期間で見返し、記憶を定着化させる）
-- 3週目は期間を開けて、Googleドキュメントに保存したメモを見る
-
+# おすすめ本
 
 
 ---
