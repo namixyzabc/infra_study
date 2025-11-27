@@ -7,7 +7,6 @@
 
 <img width="939" height="618" alt="1111" src="https://github.com/user-attachments/assets/0ab2ddc0-5ef1-41f8-88ad-4fcf9dfd9ce5" />
 
-- Amazonで評価が高い書籍を検索し、別のサイトでPDFで購入（特に辞書みたいな書籍がよい。海外で評価が高いものもお勧め。）
 - NotebookLMに取り込み、専門のAIにする
 - 既存の生成AIと、NotebookLMの結果を比較したり、調べたい内容の本のページを即座に把握する用途で使用する
 
