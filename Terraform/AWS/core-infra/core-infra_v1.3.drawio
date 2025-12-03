@@ -1,152 +1,140 @@
-<mxfile host="app.diagrams.net">
-  <diagram name="AWS Architecture">
-    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+<mxfile host="app.diagrams.net" modified="2025-12-03T00:00:00Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)" version="22.0.0" editor="5.0.0">
+  <diagram id="AWS-Architecture" name="Page-1">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
       <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <mxCell id="user_placeholder" value="User" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.user;fillColor=#D2D3D3;gradientColor=none;" vertex="1" parent="1">
-          <mxGeometry x="535.5" y="20" width="45" height="54" as="geometry" />
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- AWS Cloud Group -->
+        <mxCell id="aws" value="AWS Cloud" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=10;html=1;shape=mxgraph.aws3.aws_cloud;container=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="1180" height="760" as="geometry"/>
         </mxCell>
-        <mxCell id="aws" value="AWS Cloud" style="group;html=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" vertex="1" parent="1">
-          <mxGeometry x="40" y="100" width="1040" height="740" as="geometry" />
+
+        <!-- VPC -->
+        <mxCell id="vpc" value="VPC (core-infra)&#xa;10.0.0.0/16" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=10;html=1;shape=mxgraph.aws3.vpc;container=1;" vertex="1" parent="aws">
+          <mxGeometry x="40" y="60" width="1100" height="700" as="geometry"/>
         </mxCell>
-        <mxCell id="vpc" value="VPC (core-infra)&#xa;10.0.0.0/16" style="group;html=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;strokeColor=#248814;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;dashed=0;" vertex="1" parent="aws">
-          <mxGeometry x="40" y="50" width="960" height="660" as="geometry" />
+
+        <!-- Availability Zones -->
+        <mxCell id="az1" value="us-west-2a" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=6;html=1;shape=mxgraph.aws3.availability_zone;container=1;" vertex="1" parent="vpc">
+          <mxGeometry x="30" y="60" width="330" height="620" as="geometry"/>
         </mxCell>
-        <mxCell id="igw" value="Internet Gateway" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.internet_gateway;fillColor=#F58534;gradientColor=none;" vertex="1" parent="vpc">
-          <mxGeometry x="445.5" y="40" width="69" height="72" as="geometry" />
+        <mxCell id="az2" value="us-west-2b" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=6;html=1;shape=mxgraph.aws3.availability_zone;container=1;" vertex="1" parent="vpc">
+          <mxGeometry x="390" y="60" width="330" height="620" as="geometry"/>
         </mxCell>
-        <mxCell id="rt_public" value="Route Table (Public)" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.route_table;fillColor=#F58534;gradientColor=none;" vertex="1" parent="vpc">
-          <mxGeometry x="450" y="150" width="60" height="60" as="geometry" />
+        <mxCell id="az3" value="us-west-2c" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=6;html=1;shape=mxgraph.aws3.availability_zone;container=1;" vertex="1" parent="vpc">
+          <mxGeometry x="750" y="60" width="330" height="620" as="geometry"/>
         </mxCell>
-        <mxCell id="rt_private" value="Route Table (Private)" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.route_table;fillColor=#F58534;gradientColor=none;" vertex="1" parent="vpc">
-          <mxGeometry x="840" y="280" width="60" height="60" as="geometry" />
+
+        <!-- Public Subnets -->
+        <mxCell id="public_subnet1" value="Public Subnet 1" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=4;html=1;shape=mxgraph.aws3.public_subnet;container=1;" vertex="1" parent="az1">
+          <mxGeometry x="20" y="40" width="290" height="250" as="geometry"/>
         </mxCell>
-        <mxCell id="ecs_cluster" value="ECS Cluster (core-infra)" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.ecs;fillColor=#F58534;gradientColor=none;" vertex="1" parent="vpc">
-          <mxGeometry x="830" y="450" width="70" height="70" as="geometry" />
+        <mxCell id="public_subnet2" value="Public Subnet 2" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=4;html=1;shape=mxgraph.aws3.public_subnet;container=1;" vertex="1" parent="az2">
+          <mxGeometry x="20" y="40" width="290" height="250" as="geometry"/>
         </mxCell>
-        <mxCell id="service_discovery" value="Service Discovery" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.registry;" vertex="1" parent="vpc">
-          <mxGeometry x="830" y="550" width="70" height="70" as="geometry" />
+        <mxCell id="public_subnet3" value="Public Subnet 3" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=4;html=1;shape=mxgraph.aws3.public_subnet;container=1;" vertex="1" parent="az3">
+          <mxGeometry x="20" y="40" width="290" height="250" as="geometry"/>
         </mxCell>
-        <mxCell id="az1" value="us-west-2a" style="group;html=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_region;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=1;" vertex="1" parent="vpc">
-          <mxGeometry x="30" y="220" width="260" height="420" as="geometry" />
+
+        <!-- Private Subnets -->
+        <mxCell id="private_subnet1" value="Private Subnet 1" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=4;html=1;shape=mxgraph.aws3.private_subnet;container=1;" vertex="1" parent="az1">
+          <mxGeometry x="20" y="320" width="290" height="250" as="geometry"/>
         </mxCell>
-        <mxCell id="public_subnet1" value="Public Subnet 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F6F9;strokeColor=#248814;verticalAlign=top;align=left;spacingLeft=5;dashed=0;" vertex="1" parent="az1">
-          <mxGeometry x="20" y="40" width="220" height="150" as="geometry" />
+        <mxCell id="private_subnet2" value="Private Subnet 2" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=4;html=1;shape=mxgraph.aws3.private_subnet;container=1;" vertex="1" parent="az2">
+          <mxGeometry x="20" y="320" width="290" height="250" as="geometry"/>
         </mxCell>
-        <mxCell id="nat_gw" value="NAT Gateway" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.nat_gateway;fillColor=#F58534;gradientColor=none;" vertex="1" parent="public_subnet1">
-          <mxGeometry x="75.5" y="40" width="69" height="72" as="geometry" />
+        <mxCell id="private_subnet3" value="Private Subnet 3" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=4;html=1;shape=mxgraph.aws3.private_subnet;container=1;" vertex="1" parent="az3">
+          <mxGeometry x="20" y="320" width="290" height="250" as="geometry"/>
         </mxCell>
-        <mxCell id="private_subnet1" value="Private Subnet 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F6F9;strokeColor=#147EBA;verticalAlign=top;align=left;spacingLeft=5;dashed=0;" vertex="1" parent="az1">
-          <mxGeometry x="20" y="230" width="220" height="150" as="geometry" />
+
+        <!-- Internet Gateway -->
+        <mxCell id="igw" value="Internet Gateway" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.internet_gateway;" vertex="1" parent="vpc">
+          <mxGeometry x="505" y="10" width="70" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="az2" value="us-west-2b" style="group;html=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_region;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=1;" vertex="1" parent="vpc">
-          <mxGeometry x="310" y="220" width="260" height="420" as="geometry" />
+
+        <!-- NAT Gateway -->
+        <mxCell id="nat_gw" value="NAT Gateway" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.nat_gateway;" vertex="1" parent="public_subnet1">
+          <mxGeometry x="110" y="110" width="80" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="public_subnet2" value="Public Subnet 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F6F9;strokeColor=#248814;verticalAlign=top;align=left;spacingLeft=5;dashed=0;" vertex="1" parent="az2">
-          <mxGeometry x="20" y="40" width="220" height="150" as="geometry" />
+
+        <!-- Route Tables -->
+        <mxCell id="rt_public" value="Route Table (Public)" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.route_table;" vertex="1" parent="vpc">
+          <mxGeometry x="480" y="110" width="120" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="private_subnet2" value="Private Subnet 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F6F9;strokeColor=#147EBA;verticalAlign=top;align=left;spacingLeft=5;dashed=0;" vertex="1" parent="az2">
-          <mxGeometry x="20" y="230" width="220" height="150" as="geometry" />
+        <mxCell id="rt_private" value="Route Table (Private)" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.route_table;" vertex="1" parent="vpc">
+          <mxGeometry x="480" y="220" width="140" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="ecs_service_placeholder" value="ECS Service" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.container;" vertex="1" parent="private_subnet2">
-          <mxGeometry x="75" y="40" width="70" height="70" as="geometry" />
+
+        <!-- ECS Cluster -->
+        <mxCell id="ecs_cluster" value="ECS Cluster (core-infra)" style="outlineConnect=0;dashed=0;verticalLabelPosition=top;verticalAlign=top;align=left;spacing=6;html=1;shape=mxgraph.aws3.ecs;container=1;" vertex="1" parent="vpc">
+          <mxGeometry x="260" y="360" width="600" height="260" as="geometry"/>
         </mxCell>
-        <mxCell id="az3" value="us-west-2c" style="group;html=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_region;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=1;" vertex="1" parent="vpc">
-          <mxGeometry x="590" y="220" width="260" height="420" as="geometry" />
+
+        <!-- Service Discovery -->
+        <mxCell id="service_discovery" value="Service Discovery&#xa;default.core-infra.local" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.service_discovery;" vertex="1" parent="ecs_cluster">
+          <mxGeometry x="60" y="80" width="120" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="public_subnet3" value="Public Subnet 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F6F9;strokeColor=#248814;verticalAlign=top;align=left;spacingLeft=5;dashed=0;" vertex="1" parent="az3">
-          <mxGeometry x="20" y="40" width="220" height="150" as="geometry" />
+
+        <!-- ECS Service Placeholder -->
+        <mxCell id="ecs_service_placeholder" value="ECS Service (Placeholder)" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.ecs;" vertex="1" parent="private_subnet2">
+          <mxGeometry x="95" y="130" width="120" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="private_subnet3" value="Private Subnet 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F6F9;strokeColor=#147EBA;verticalAlign=top;align=left;spacingLeft=5;dashed=0;" vertex="1" parent="az3">
-          <mxGeometry x="20" y="230" width="220" height="150" as="geometry" />
+
+        <!-- External User -->
+        <mxCell id="user_placeholder" value="User" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.user;" vertex="1" parent="1">
+          <mxGeometry x="10" y="220" width="60" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_user_igw" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="user_placeholder" target="igw">
-          <mxGeometry relative="1" as="geometry" />
+
+        <!-- Edges -->
+
+        <!-- 3.1 External Inbound -->
+        <mxCell id="e1" value="HTTPS" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="user_placeholder" target="igw">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_igw_rt_pub" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="vpc" source="igw" target="rt_public">
-          <mxGeometry relative="1" as="geometry" />
+
+        <!-- 3.2 Public Subnet Routing -->
+        <mxCell id="e2" value="" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="igw" target="rt_public">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_rt_pub_sub1" value="association" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="vpc" source="rt_public" target="public_subnet1">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="480" y="210" />
-              <mxPoint x="160" y="210" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e3" value="association" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="rt_public" target="public_subnet1">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_rt_pub_sub2" value="association" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="vpc" source="rt_public" target="public_subnet2">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e4" value="association" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="rt_public" target="public_subnet2">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_rt_pub_sub3" value="association" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="vpc" source="rt_public" target="public_subnet3">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="480" y="210" />
-              <mxPoint x="720" y="210" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e5" value="association" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="rt_public" target="public_subnet3">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_priv_sub1_rt" value="association" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="vpc" source="private_subnet1" target="rt_private">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="300" y="525" />
-              <mxPoint x="300" y="310" />
-            </Array>
-          </mxGeometry>
+
+        <!-- 3.3 Private Subnet Routing (Outbound) -->
+        <mxCell id="e6" value="" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="ecs_service_placeholder" target="rt_private">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_priv_sub2_rt" value="association" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="vpc" source="private_subnet2" target="rt_private">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="580" y="525" />
-              <mxPoint x="580" y="310" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e7" value="association" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="private_subnet1" target="rt_private">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_priv_sub3_rt" value="association" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="vpc" source="private_subnet3" target="rt_private">
-          <mxGeometry relative="1" as="geometry">
-             <Array as="points">
-              <mxPoint x="720" y="440" />
-              <mxPoint x="870" y="440" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e8" value="association" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="private_subnet2" target="rt_private">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_ecs_rt_private" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="vpc" source="ecs_service_placeholder" target="rt_private">
-          <mxGeometry relative="1" as="geometry">
-             <Array as="points">
-              <mxPoint x="495" y="480" />
-              <mxPoint x="800" y="480" />
-              <mxPoint x="800" y="310" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e9" value="association" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="private_subnet3" target="rt_private">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_rt_priv_nat" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="vpc" source="rt_private" target="nat_gw">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="870" y="250" />
-              <mxPoint x="200" y="250" />
-              <mxPoint x="200" y="296" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e10" value="" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="rt_private" target="nat_gw">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_nat_rt_pub" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="vpc" source="nat_gw" target="rt_public">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="120" y="200" />
-              <mxPoint x="420" y="200" />
-              <mxPoint x="420" y="180" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e11" value="" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="nat_gw" target="rt_public">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_ecs_cluster_disc" value="uses" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="vpc" source="ecs_cluster" target="service_discovery">
-          <mxGeometry relative="1" as="geometry" />
+
+        <!-- 3.4 ECS Related -->
+        <mxCell id="e12" value="uses" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="ecs_cluster" target="service_discovery">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_ecs_cluster_svc" value="runs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="vpc" source="ecs_cluster" target="ecs_service_placeholder">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-               <mxPoint x="865" y="525" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e13" value="runs" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="ecs_cluster" target="ecs_service_placeholder">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
