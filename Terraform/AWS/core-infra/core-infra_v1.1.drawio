@@ -154,3 +154,147 @@
 </mxGraphModel>
 </diagram>
 </mxfile>
+<mxfile host="app.diagrams.net" modified="2025-12-03T00:00:00Z" agent="5.0 (Windows)" version="24.7.8" editor="diagrams.net">
+  <diagram id="ecs-vpc-diagram" name="AWS ECS Blueprint">
+    <mxGraphModel dx="1362" dy="731" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="1" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- AWS Cloud -->
+        <mxCell id="awsCloud" value="AWS Cloud (us-west-2)" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;labelPosition=center;verticalAlign=top;align=center;spacingTop=10;fillColor=none;strokeColor=#232F3E;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="40" width="980" height="640" as="geometry"/>
+        </mxCell>
+
+        <!-- VPC -->
+        <mxCell id="vpc" value="VPC&#xa;10.0.0.0/16" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;dashed=1;strokeColor=#147EBA;fillColor=none;rounded=0;labelPosition=left;verticalAlign=top;align=left;spacingLeft=10;spacingTop=10;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="awsCloud">
+          <mxGeometry x="40" y="40" width="900" height="560" as="geometry"/>
+        </mxCell>
+
+        <!-- Public Subnets Group -->
+        <mxCell id="publicSubnets" value="Public Subnets" style="swimlane;horizontal=0;rounded=0;dashed=1;strokeColor=#AAB7B8;fillColor=none;fontStyle=1;labelPosition=top;verticalAlign=top;align=left;spacingTop=4;spacingLeft=4;" vertex="1" parent="vpc">
+          <mxGeometry x="40" y="60" width="820" height="190" as="geometry"/>
+        </mxCell>
+
+        <!-- Private Subnets Group -->
+        <mxCell id="privateSubnets" value="Private Subnets" style="swimlane;horizontal=0;rounded=0;dashed=1;strokeColor=#AAB7B8;fillColor=none;fontStyle=1;labelPosition=top;verticalAlign=top;align=left;spacingTop=4;spacingLeft=4;" vertex="1" parent="vpc">
+          <mxGeometry x="40" y="290" width="820" height="260" as="geometry"/>
+        </mxCell>
+
+        <!-- AZ labels -->
+        <mxCell id="azLabel" value="AZs: us-west-2a, us-west-2b, us-west-2c" style="text;align=left;verticalAlign=top;fontSize=11;fontColor=#4D4D4D;" vertex="1" parent="vpc">
+          <mxGeometry x="50" y="40" width="300" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- Public Subnet AZ1 -->
+        <mxCell id="publicSubnet1" value="Public Subnet A" style="swimlane;horizontal=1;rounded=0;strokeColor=#AAB7B8;fillColor=none;fontSize=11;labelPosition=top;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="publicSubnets">
+          <mxGeometry x="10" y="30" width="260" height="150" as="geometry"/>
+        </mxCell>
+
+        <!-- Public Subnet AZ2 -->
+        <mxCell id="publicSubnet2" value="Public Subnet B" style="swimlane;horizontal=1;rounded=0;strokeColor=#AAB7B8;fillColor=none;fontSize=11;labelPosition=top;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="publicSubnets">
+          <mxGeometry x="280" y="30" width="260" height="150" as="geometry"/>
+        </mxCell>
+
+        <!-- Public Subnet AZ3 -->
+        <mxCell id="publicSubnet3" value="Public Subnet C" style="swimlane;horizontal=1;rounded=0;strokeColor=#AAB7B8;fillColor=none;fontSize=11;labelPosition=top;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="publicSubnets">
+          <mxGeometry x="550" y="30" width="260" height="150" as="geometry"/>
+        </mxCell>
+
+        <!-- Private Subnet AZ1 -->
+        <mxCell id="privateSubnet1" value="Private Subnet A" style="swimlane;horizontal=1;rounded=0;strokeColor=#AAB7B8;fillColor=none;fontSize=11;labelPosition=top;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="privateSubnets">
+          <mxGeometry x="10" y="30" width="260" height="210" as="geometry"/>
+        </mxCell>
+
+        <!-- Private Subnet AZ2 -->
+        <mxCell id="privateSubnet2" value="Private Subnet B" style="swimlane;horizontal=1;rounded=0;strokeColor=#AAB7B8;fillColor=none;fontSize=11;labelPosition=top;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="privateSubnets">
+          <mxGeometry x="280" y="30" width="260" height="210" as="geometry"/>
+        </mxCell>
+
+        <!-- Private Subnet AZ3 -->
+        <mxCell id="privateSubnet3" value="Private Subnet C" style="swimlane;horizontal=1;rounded=0;strokeColor=#AAB7B8;fillColor=none;fontSize=11;labelPosition=top;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="privateSubnets">
+          <mxGeometry x="550" y="30" width="260" height="210" as="geometry"/>
+        </mxCell>
+
+        <!-- Internet Gateway -->
+        <mxCell id="igw" value="Internet Gateway" style="shape=mxgraph.aws4.internet_gateway;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAlign=center;labelBackgroundColor=none;fontColor=#232F3E;" vertex="1" parent="vpc">
+          <mxGeometry x="780" y="80" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- NAT Gateway (single_nat_gateway = true) -->
+        <mxCell id="natGw" value="NAT Gateway" style="shape=mxgraph.aws4.nat_gateway;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAlign=center;labelBackgroundColor=none;fontColor=#232F3E;" vertex="1" parent="publicSubnet1">
+          <mxGeometry x="95" y="70" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Routes: Private Subnets -> NAT Gateway -->
+        <mxCell id="edgePrivate1ToNat" edge="1" parent="vpc" source="privateSubnet1" target="natGw" style="endArrow=block;endFill=1;strokeColor=#7F8C8D;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edgePrivate2ToNat" edge="1" parent="vpc" source="privateSubnet2" target="natGw" style="endArrow=block;endFill=1;strokeColor=#7F8C8D;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edgePrivate3ToNat" edge="1" parent="vpc" source="privateSubnet3" target="natGw" style="endArrow=block;endFill=1;strokeColor=#7F8C8D;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Route: NAT Gateway -> Internet Gateway -->
+        <mxCell id="edgeNatToIgw" edge="1" parent="vpc" source="natGw" target="igw" style="endArrow=block;endFill=1;strokeColor=#7F8C8D;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ECS Cluster Group -->
+        <mxCell id="ecsClusterGroup" value="ECS Cluster" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws;dashed=0;rounded=0;strokeColor=#FF9900;fillColor=none;labelPosition=top;verticalAlign=top;align=left;spacingTop=8;spacingLeft=8;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="vpc">
+          <mxGeometry x="160" y="320" width="650" height="210" as="geometry"/>
+        </mxCell>
+
+        <!-- ECS Cluster Icon -->
+        <mxCell id="ecsCluster" value="ECS Cluster&#xa;FARGATE / FARGATE_SPOT" style="shape=mxgraph.aws4.ecs;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAlign=center;labelBackgroundColor=none;fontColor=#232F3E;" vertex="1" parent="ecsClusterGroup">
+          <mxGeometry x="280" y="40" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Fargate Tasks in Private Subnets -->
+        <mxCell id="taskA" value="Fargate Tasks" style="shape=mxgraph.aws4.container;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAlign=center;labelBackgroundColor=none;fontColor=#232F3E;" vertex="1" parent="privateSubnet1">
+          <mxGeometry x="100" y="90" width="50" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="taskB" value="Fargate Tasks" style="shape=mxgraph.aws4.container;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAlign=center;labelBackgroundColor=none;fontColor=#232F3E;" vertex="1" parent="privateSubnet2">
+          <mxGeometry x="100" y="90" width="50" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="taskC" value="Fargate Tasks" style="shape=mxgraph.aws4.container;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAlign=center;labelBackgroundColor=none;fontColor=#232F3E;" vertex="1" parent="privateSubnet3">
+          <mxGeometry x="100" y="90" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Lines from ECS Cluster to Fargate Tasks -->
+        <mxCell id="edgeClusterToTaskA" edge="1" parent="ecsClusterGroup" source="ecsCluster" target="taskA" style="endArrow=block;endFill=1;strokeColor=#7F8C8D;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edgeClusterToTaskB" edge="1" parent="ecsClusterGroup" source="ecsCluster" target="taskB" style="endArrow=block;endFill=1;strokeColor=#7F8C8D;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edgeClusterToTaskC" edge="1" parent="ecsClusterGroup" source="ecsCluster" target="taskC" style="endArrow=block;endFill=1;strokeColor=#7F8C8D;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Service Discovery Namespace (Cloud Map Private DNS Namespace) -->
+        <mxCell id="sdNamespace" value="Cloud Map&#xa;Private DNS Namespace&#xa;default.&lt;cluster-name&gt;.local" style="shape=mxgraph.aws4.cloud_map;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAlign=center;labelBackgroundColor=none;fontColor=#232F3E;" vertex="1" parent="vpc">
+          <mxGeometry x="680" y="340" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Connection: ECS Cluster -> Service Discovery -->
+        <mxCell id="edgeClusterToSD" edge="1" parent="vpc" source="ecsCluster" target="sdNamespace" style="endArrow=block;endFill=1;strokeColor=#7F8C8D;labelBackgroundColor=none;fontSize=11;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Label for Service Connect Defaults -->
+        <mxCell id="edgeLabelSC" value="Service Connect&#xa;namespace ARN" style="text;align=center;verticalAlign=middle;fontSize=10;fontColor=#4D4D4D;" vertex="1" parent="vpc">
+          <mxGeometry x="610" y="365" width="70" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- AWS Account / Provider Note -->
+        <mxCell id="providerNote" value="Terraform AWS Provider&#xa;Region: us-west-2&#xa;Resources: VPC, Subnets, NAT GW, ECS Cluster, Cloud Map" style="shape=note;whiteSpace=wrap;html=1;rounded=1;strokeColor=#BDC3C7;fillColor=#FBFCFC;fontSize=10;fontColor=#4D4D4D;" vertex="1" parent="awsCloud">
+          <mxGeometry x="770" y="520" width="230" height="90" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
