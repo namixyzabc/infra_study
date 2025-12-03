@@ -1,0 +1,169 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0" version="29.2.3">
+  <diagram name="AWS Architecture" id="aws-architecture">
+    <mxGraphModel dx="976" dy="603" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- AWS Cloud -->
+        <mxCell id="aws-cloud" value="AWS Cloud" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud;strokeColor=#858B94;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#858B94;dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="1080" height="740" as="geometry" />
+        </mxCell>
+        
+        <!-- Region -->
+        <mxCell id="region" value="us-west-2" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_region;strokeColor=#879196;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#879196;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="80" width="1000" height="660" as="geometry" />
+        </mxCell>
+        
+        <!-- VPC -->
+        <mxCell id="vpc" value="VPC (core-infra)&#xa;10.0.0.0/16" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;strokeColor=#248814;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="120" y="140" width="920" height="560" as="geometry" />
+        </mxCell>
+        
+        <!-- Availability Zones -->
+        <mxCell id="az1" value="us-west-2a" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=11;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_availability_zone;strokeColor=#545B64;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#545B64;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="200" width="240" height="460" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="az2" value="us-west-2b" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=11;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_availability_zone;strokeColor=#545B64;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#545B64;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="200" width="240" height="460" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="az3" value="us-west-2c" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=11;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_availability_zone;strokeColor=#545B64;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#545B64;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="720" y="200" width="240" height="460" as="geometry" />
+        </mxCell>
+        
+        <!-- Public Subnets -->
+        <mxCell id="public-subnet-1" value="Public Subnet 1&#xa;10.0.0.0/24" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;grStroke=0;strokeColor=#7AA116;fillColor=#F2F6E8;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="180" y="240" width="200" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="public-subnet-2" value="Public Subnet 2&#xa;10.0.1.0/24" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;grStroke=0;strokeColor=#7AA116;fillColor=#F2F6E8;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="460" y="240" width="200" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="public-subnet-3" value="Public Subnet 3&#xa;10.0.2.0/24" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;grStroke=0;strokeColor=#7AA116;fillColor=#F2F6E8;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="740" y="240" width="200" height="140" as="geometry" />
+        </mxCell>
+        
+        <!-- Private Subnets -->
+        <mxCell id="private-subnet-1" value="Private Subnet 1&#xa;10.0.10.0/24" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;grStroke=0;strokeColor=#00A4A6;fillColor=#E6F6F7;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="180" y="440" width="200" height="200" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="private-subnet-2" value="Private Subnet 2&#xa;10.0.11.0/24" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;grStroke=0;strokeColor=#00A4A6;fillColor=#E6F6F7;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="460" y="440" width="200" height="200" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="private-subnet-3" value="Private Subnet 3&#xa;10.0.12.0/24" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;grStroke=0;strokeColor=#00A4A6;fillColor=#E6F6F7;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="740" y="440" width="200" height="200" as="geometry" />
+        </mxCell>
+        
+        <!-- Internet -->
+        <mxCell id="internet" value="Internet" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.internet;" parent="1" vertex="1">
+          <mxGeometry x="540" y="10" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Internet Gateway -->
+        <mxCell id="igw" value="Internet Gateway" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.internet_gateway;" parent="1" vertex="1">
+          <mxGeometry x="540" y="90" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- NAT Gateway -->
+        <mxCell id="nat" value="NAT Gateway" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.nat_gateway;" parent="1" vertex="1">
+          <mxGeometry x="255" y="300" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- ECS Cluster -->
+        <mxCell id="ecs-cluster" value="ECS Cluster&#xa;(core-infra)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.ecs_cluster;" parent="1" vertex="1">
+          <mxGeometry x="255" y="510" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Fargate Tasks -->
+        <mxCell id="fargate-1" value="ECS Service" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.ecs_service;" parent="1" vertex="1">
+          <mxGeometry x="535" y="510" width="37" height="48" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="fargate-2" value="ECS Service" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.ecs_service;" parent="1" vertex="1">
+          <mxGeometry x="815" y="510" width="37" height="48" as="geometry" />
+        </mxCell>
+        
+        <!-- Cloud Map -->
+        <mxCell id="cloudmap" value="Service Discovery&#xa;(default.core-infra.local)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.cloud_map;" parent="1" vertex="1">
+          <mxGeometry x="535" y="620" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Route Tables -->
+        <mxCell id="rt-public" value="Route Table&#xa;(Public)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.route_table;" parent="1" vertex="1">
+          <mxGeometry x="970" y="300" width="40" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="rt-private" value="Route Table&#xa;(Private)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.route_table;" parent="1" vertex="1">
+          <mxGeometry x="970" y="520" width="40" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Connections -->
+        <mxCell id="conn-internet-igw" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeColor=#545B64;" parent="1" source="internet" target="igw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-igw-pub1" style="endArrow=classic;html=1;rounded=0;strokeColor=#248814;" parent="1" source="igw" target="public-subnet-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-igw-pub2" style="endArrow=classic;html=1;rounded=0;strokeColor=#248814;" parent="1" source="igw" target="public-subnet-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-igw-pub3" style="endArrow=classic;html=1;rounded=0;strokeColor=#248814;" parent="1" source="igw" target="public-subnet-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-nat-priv1" style="endArrow=classic;html=1;rounded=0;strokeColor=#147EBA;" parent="1" source="nat" target="private-subnet-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-nat-priv2" style="endArrow=classic;html=1;rounded=0;strokeColor=#147EBA;" parent="1" source="nat" target="private-subnet-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-nat-priv3" style="endArrow=classic;html=1;rounded=0;strokeColor=#147EBA;" parent="1" source="nat" target="private-subnet-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-ecs-task1" style="endArrow=classic;html=1;rounded=0;strokeColor=#ED7100;dashed=1;" parent="1" source="ecs-cluster" target="fargate-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-ecs-task2" style="endArrow=classic;html=1;rounded=0;strokeColor=#ED7100;dashed=1;" parent="1" source="ecs-cluster" target="fargate-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-cloudmap-ecs" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeColor=#8C4FFF;dashed=1;" parent="1" source="cloudmap" target="ecs-cluster" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-cloudmap-task1" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeColor=#8C4FFF;dashed=1;" parent="1" source="cloudmap" target="fargate-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-cloudmap-task2" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeColor=#8C4FFF;dashed=1;" parent="1" source="cloudmap" target="fargate-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-igw-rtpub" style="endArrow=classic;html=1;rounded=0;strokeColor=#545B64;dashed=1;" parent="1" source="igw" target="rt-public" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-nat-rtpriv" style="endArrow=classic;html=1;rounded=0;strokeColor=#545B64;dashed=1;" parent="1" source="nat" target="rt-private" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="conn-rtpub-rtpriv" style="endArrow=classic;html=1;rounded=0;strokeColor=#545B64;dashed=1;" parent="1" source="rt-public" target="rt-private" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
