@@ -1,15 +1,4 @@
-ご提示いただいたデータは、2つの異なる mxfile（Draw.io/Diagrams.netのファイル定義）が単純に連結されており、そのままではファイルとして読み込めない不正な形式になっていました。
 
-これを**1つのファイル内の「2つのページ（タブ）」**として読み込めるように修正しました。
-（1ページ目に最初の図、2ページ目に2つ目の図「AWS ECS Blueprint」が配置されます）
-
-以下のコードをコピーして、拡張子 .drawio または .xml として保存するか、Draw.ioのメニューから「Extras (その他)」>「Edit Diagram (図を編集)」を開いて貼り付けてください。
-
-code
-Xml
-download
-content_copy
-expand_less
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="app.diagrams.net" modified="2025-12-03T00:00:00.000Z" agent="5.0 (compatible)" etag="1" version="20.7.3" type="device">
   <diagram id="diagram0" name="Page-1">
