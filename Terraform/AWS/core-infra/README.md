@@ -1,3 +1,9 @@
+ご提示いただいたファイルの前半部分はすでに日本語化されていますので、後半の `terraform-docs` によって生成された英語のテーブル部分（Requirements, Providers, Modules, Resources, Inputs, Outputs）を日本語に翻訳しました。
+
+全体をまとめた内容は以下の通りです。
+
+***
+
 # コアインフラストラクチャ
 このフォルダには、ECS FargateワークロードのコアインフラストラクチャをデプロイするためのTerraformコードが含まれています。このスクリプトによって作成されるAWSリソースは次のとおりです。
 * ネットワーキング
@@ -39,47 +45,47 @@ terraform destroy
 
 
 <!-- BEGIN_TF_DOCS -->
-## Requirements
+## 前提条件
 
-| Name | Version |
+| 名前 | バージョン |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | = 5.100.0 |
 
-## Providers
+## プロバイダー
 
-| Name | Version |
+| 名前 | バージョン |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | = 5.100.0 |
 
-## Modules
+## モジュール
 
-| Name | Source | Version |
+| 名前 | ソース | バージョン |
 |------|--------|---------|
 | <a name="module_ecs_cluster"></a> [ecs\_cluster](#module\_ecs\_cluster) | terraform-aws-modules/ecs/aws//modules/cluster | ~> 5.6 |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
 
-## Resources
+## リソース
 
-| Name | Type |
+| 名前 | タイプ |
 |------|------|
 | [aws_service_discovery_private_dns_namespace.this](https://registry.terraform.io/providers/hashicorp/aws/5.100.0/docs/resources/service_discovery_private_dns_namespace) | resource |
 | [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/5.100.0/docs/data-sources/availability_zones) | data source |
 
-## Inputs
+## 入力
 
-No inputs.
+入力はありません。
 
-## Outputs
+## 出力
 
-| Name | Description |
+| 名前 | 説明 |
 |------|-------------|
-| <a name="output_cluster_arn"></a> [cluster\_arn](#output\_cluster\_arn) | ARN that identifies the cluster |
-| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | ID that identifies the cluster |
-| <a name="output_cluster_name"></a> [cluster\_name](#output\_cluster\_name) | Name that identifies the cluster |
-| <a name="output_private_subnets"></a> [private\_subnets](#output\_private\_subnets) | A list of private subnets for the client app |
-| <a name="output_private_subnets_cidr_blocks"></a> [private\_subnets\_cidr\_blocks](#output\_private\_subnets\_cidr\_blocks) | A list of private subnets CIDRs |
-| <a name="output_public_subnets"></a> [public\_subnets](#output\_public\_subnets) | A list of public subnets |
-| <a name="output_service_discovery_namespaces"></a> [service\_discovery\_namespaces](#output\_service\_discovery\_namespaces) | Service discovery namespaces already available |
-| <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | The ID of the VPC |
+| <a name="output_cluster_arn"></a> [cluster\_arn](#output\_cluster\_arn) | クラスターを識別する ARN |
+| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | クラスターを識別する ID |
+| <a name="output_cluster_name"></a> [cluster\_name](#output\_cluster\_name) | クラスターを識別する名前 |
+| <a name="output_private_subnets"></a> [private\_subnets](#output\_private\_subnets) | クライアントアプリ用のプライベートサブネットのリスト |
+| <a name="output_private_subnets_cidr_blocks"></a> [private\_subnets\_cidr\_blocks](#output\_private\_subnets\_cidr\_blocks) | プライベートサブネットの CIDR ブロックのリスト |
+| <a name="output_public_subnets"></a> [public\_subnets](#output\_public\_subnets) | パブリックサブネットのリスト |
+| <a name="output_service_discovery_namespaces"></a> [service\_discovery\_namespaces](#output\_service\_discovery\_namespaces) | 利用可能なサービスディスカバリネームスペース |
+| <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | VPC の ID |
 <!-- END_TF_DOCS -->
