@@ -12,13 +12,12 @@
 * CloudWatchロググループ
 * CloudMapサービスディスカバリネームスペース `default`
 
-## はじめに
-お使いのラップトップにすべての[前提条件](../../../README.md)が揃っていることを確認してください。
+
 
 ## 使い方
 * 自分のアカウントからフォークしたリポジトリ（aws-ia組織のものではありません）をクローンし、以下のように適切なディレクトリに移動します。
 ```bash
-cd ecs-blueprints/terraform/fargate-examples/core-infra/
+cd core-infra/
 ```
 * Terraform initを実行して、プロバイダーをダウンロードし、モジュールをインストールします。
 ```shell
