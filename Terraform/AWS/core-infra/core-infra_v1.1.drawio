@@ -14,8 +14,8 @@
         <!-- VPC -->
         <mxCell id="3" value="VPC (10.0.0.0/16)" style="outlineConnect=0;gradientColor=none;html=1;shape=mxgraph.aws4.group_vpc;fillColor=#FFFFFF;strokeColor=#D9E0E2;labelBackgroundColor=none;verticalAlign=top;spacingTop=28;fontSize=12;fontColor=#232F3E;" vertex="1" parent="2">
           <mxGeometry x="40" y="60" width="1320" height="700" as="geometry" />
-        </mxGeometry>
         </mxCell>
+        <!-- 修正: ここにあった余分な </mxCell> を削除しました -->
 
         <!-- AZ 1 -->
         <mxCell id="4" value="AZ 1 (us-west-2a)" style="outlineConnect=0;gradientColor=none;html=1;shape=mxgraph.aws4.group_az;fillColor=#FFFFFF;strokeColor=#D9E0E2;labelBackgroundColor=none;verticalAlign=top;spacingTop=24;fontSize=11;fontColor=#232F3E;" vertex="1" parent="3">
