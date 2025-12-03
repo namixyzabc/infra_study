@@ -1,10 +1,110 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0" version="29.2.3">
-  <diagram name="ページ1" id="o8h0gyZu5EgnkdKVMZQ5">
-    <mxGraphModel>
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-      </root>
-    </mxGraphModel>
-  </diagram>
+
+<mxfile host="app.diagrams.net" modified="2024-05-22T12:00:00.000Z" agent="Terraform-Analysis" etag="aws-arch-v1" version="21.0.0" type="device">
+<diagram id="aws-infrastructure" name="AWS Architecture">
+<mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<root>
+<mxCell id="0" />
+<mxCell id="1" parent="0" />
+<!-- Region -->
+    <mxCell id="region" value="Region (us-west-2)" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];cross=0;html=1;verticalAlign=top;align=left;spacingTop=5;spacingLeft=5;strokeColor=#EB5F07;dashed=1;fillColor=none;fontColor=#EB5F07;fontStyle=0;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="40" y="40" width="780" height="680" as="geometry" />
+    </mxCell>
+
+    <!-- VPC -->
+    <mxCell id="vpc" value="VPC (10.0.0.0/16)" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];cross=0;html=1;verticalAlign=top;align=left;spacingTop=5;spacingLeft=5;strokeColor=#248814;fillColor=none;fontColor=#248814;fontStyle=1;strokeWidth=2;" vertex="1" parent="region">
+      <mxGeometry x="40" y="60" width="700" height="580" as="geometry" />
+    </mxCell>
+
+    <!-- Internet Gateway -->
+    <mxCell id="igw" value="Internet Gateway" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.internet_gateway;fillColor=#F58534;gradientColor=none;" vertex="1" parent="region">
+      <mxGeometry x="370" y="30" width="60" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- AZ 1 -->
+    <mxCell id="az1" value="Availability Zone A" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];cross=0;html=1;verticalAlign=top;align=left;spacingTop=5;spacingLeft=5;strokeColor=#147EBA;dashed=1;fillColor=none;fontColor=#147EBA;" vertex="1" parent="vpc">
+      <mxGeometry x="30" y="60" width="300" height="480" as="geometry" />
+    </mxCell>
+
+    <!-- AZ 2 -->
+    <mxCell id="az2" value="Availability Zone B" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];cross=0;html=1;verticalAlign=top;align=left;spacingTop=5;spacingLeft=5;strokeColor=#147EBA;dashed=1;fillColor=none;fontColor=#147EBA;" vertex="1" parent="vpc">
+      <mxGeometry x="370" y="60" width="300" height="480" as="geometry" />
+    </mxCell>
+
+    <!-- Public Subnet 1 -->
+    <mxCell id="pub_sub1" value="Public Subnet 1" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];cross=0;html=1;verticalAlign=top;align=left;spacingTop=5;spacingLeft=5;strokeColor=#248814;fillColor=#E9F3E6;fontColor=#248814;" vertex="1" parent="az1">
+      <mxGeometry x="20" y="40" width="260" height="140" as="geometry" />
+    </mxCell>
+
+    <!-- NAT Gateway (Single) -->
+    <mxCell id="nat" value="NAT Gateway" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.nat_gateway;fillColor=#F58534;gradientColor=none;" vertex="1" parent="pub_sub1">
+      <mxGeometry x="100" y="50" width="60" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Private Subnet 1 -->
+    <mxCell id="priv_sub1" value="Private Subnet 1" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];cross=0;html=1;verticalAlign=top;align=left;spacingTop=5;spacingLeft=5;strokeColor=#147EBA;fillColor=#E6F2F8;fontColor=#147EBA;" vertex="1" parent="az1">
+      <mxGeometry x="20" y="200" width="260" height="260" as="geometry" />
+    </mxCell>
+
+    <!-- Public Subnet 2 -->
+    <mxCell id="pub_sub2" value="Public Subnet 2" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];cross=0;html=1;verticalAlign=top;align=left;spacingTop=5;spacingLeft=5;strokeColor=#248814;fillColor=#E9F3E6;fontColor=#248814;" vertex="1" parent="az2">
+      <mxGeometry x="20" y="40" width="260" height="140" as="geometry" />
+    </mxCell>
+
+    <!-- Private Subnet 2 -->
+    <mxCell id="priv_sub2" value="Private Subnet 2" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];cross=0;html=1;verticalAlign=top;align=left;spacingTop=5;spacingLeft=5;strokeColor=#147EBA;fillColor=#E6F2F8;fontColor=#147EBA;" vertex="1" parent="az2">
+      <mxGeometry x="20" y="200" width="260" height="260" as="geometry" />
+    </mxCell>
+
+    <!-- ECS Cluster Group -->
+    <mxCell id="ecs_group" value="ECS Cluster (Fargate)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#F58534;strokeWidth=2;dashed=1;verticalAlign=top;align=center;fontStyle=1;fontColor=#F58534;" vertex="1" parent="vpc">
+      <mxGeometry x="40" y="240" width="620" height="280" as="geometry" />
+    </mxCell>
+
+    <mxCell id="ecs_icon" value="ECS Service" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.ecs;fillColor=#F58534;gradientColor=none;" vertex="1" parent="ecs_group">
+      <mxGeometry x="280" y="40" width="60" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Cloud Map / Service Discovery -->
+    <mxCell id="cloudmap" value="Cloud Map&#xa;(Service Discovery)" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.cloud_map;fillColor=#C925D1;gradientColor=none;" vertex="1" parent="ecs_group">
+      <mxGeometry x="280" y="150" width="60" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Connections -->
+    <!-- IGW to VPC -->
+    <mxCell id="edge_igw_vpc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545b64;strokeWidth=2;" edge="1" parent="region" source="igw" target="vpc">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- NAT to IGW -->
+    <mxCell id="edge_nat_igw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545b64;dashed=1;" edge="1" parent="region" source="nat" target="igw">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Private Sub 1 to NAT -->
+    <mxCell id="edge_priv1_nat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545b64;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="vpc" source="priv_sub1" target="nat">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="180" y="190" />
+          <mxPoint x="180" y="190" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Private Sub 2 to NAT (Cross AZ) -->
+    <mxCell id="edge_priv2_nat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545b64;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="vpc" source="priv_sub2" target="nat">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="520" y="140" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ECS to CloudMap -->
+    <mxCell id="edge_ecs_cm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F58534;dashed=1;" edge="1" parent="ecs_group" source="ecs_icon" target="cloudmap">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+</diagram>
 </mxfile>
