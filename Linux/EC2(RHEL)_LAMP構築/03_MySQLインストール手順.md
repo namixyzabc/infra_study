@@ -19,7 +19,7 @@ OS（AlmaLinuxなど）のデフォルトのリポジトリにはMySQLが含ま�
 ### 4. 初期パスワードの確認とセキュリティ設定
 MySQLはインストール直後、一時的なパスワードがログファイルに生成される。
 *   **一時パスワードの取得**: `/var/log/mysqld.log` ファイルを `grep` コマンドで検索し、「temporary password」を確認します。
-*   grep "password" /var/log/mysqld.log
+   *   grep "password" /var/log/mysqld.log
 *   **初期設定（セキュリティ向上）**: **`mysql_secure_installation`** コマンドを実行します。この対話形式のツールにより、以下の設定をまとめて行えます,:
     *   ルートユーザーのパスワード変更
     *   匿名ユーザー（Anonymous User）の削除
