@@ -1,3 +1,5 @@
 https://docs.snowflake.com/ja
 
 https://www.snowflake.com/ja/developers/guides/?tags=solution-center%2Fcertification%2Fquickstart&page=0&pageSize=12&offset=0
+
+https://learn.snowflake.com/en/administrator/
